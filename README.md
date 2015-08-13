@@ -7,8 +7,8 @@ Just a simple (quick and dirty) web app to improve a team organization at luncht
 
 ## Creators
 
-Web Developer : Lionel Repellin
-Designer : [Jimmy Burbure](http://www.jimmyburbure.fr/)
+ Web Developer : Lionel Repellin
+ Designer : [Jimmy Burbure](http://www.jimmyburbure.fr/)
 
 ## Copyright and license
 
