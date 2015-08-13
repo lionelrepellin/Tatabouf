@@ -1,0 +1,222 @@
+﻿@import url(http://fonts.googleapis.com/css?family=Ubuntu);
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+::-moz-selection {
+  background: #2B3D51;
+  color: #FFF;
+}
+::selection {
+  background: #2B3D51;
+  color: #FFF;
+}
+body {
+  background-image: url(http://i.imgur.com/07t2mb2.gif);
+  font-family: 'Ubuntu', sans-serif;
+}
+.main {
+  height: 100vh;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+.main * {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.main .inner {
+  background-color: #FFF;
+  height: 90vh;
+  overflow-y: auto;
+  width: 1200px;
+}
+.main .inner header {
+  background: url("/Content/logo.png") center center no-repeat;
+  border-bottom: 1px solid #C9D5E5;
+  height: 100px;
+  line-height: 100px;
+  text-align: center;
+}
+.main .inner header h1 {
+  color: #2B3D51;
+  font-size: 36px;
+  font-weight: bold;
+}
+.main .inner section {
+  margin-top: 40px;
+}
+.main .inner section .tatabouf {
+  margin: 0 auto;
+  width: 1120px;
+}
+.main .inner section .tatabouf thead {
+  background-color: #A6B2C2;
+  color: #FFF;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+}
+.main .inner section .tatabouf thead tr {
+  border-bottom: 1px solid #A6B2C2;
+  height: 60px;
+}
+.main .inner section .tatabouf thead tr td {
+  line-height: 1.5em;
+  vertical-align: middle;
+  text-transform: uppercase;
+}
+.main .inner section .tatabouf thead tr td.name {
+  width: 120px;
+}
+.main .inner section .tatabouf thead tr td.empty {
+  background-color: #FFF;
+}
+.main .inner section .tatabouf tbody tr {
+  border-bottom: 1px solid #A6B2C2;
+  height: 60px;
+  text-align: center;
+}
+.main .inner section .tatabouf tbody tr td {
+  vertical-align: middle;
+}
+.main .inner section .tatabouf tbody tr td.label {
+  color: #A6B2C2;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 0 20px;
+  text-transform: uppercase;
+  text-align: left;
+  width: 200px;
+}
+.main .inner section .tatabouf tbody tr td.dont-want-to-go {
+  background-color: #F1F1F1;
+  color: #F1F1F1;
+}
+.main .inner section .tatabouf tbody tr td.want-to-go {
+  background-color: #9BD999;
+  color: #9BD999;
+}

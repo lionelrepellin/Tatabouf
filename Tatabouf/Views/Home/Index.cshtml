@@ -1,0 +1,66 @@
+﻿@model System.Collections.Generic.IEnumerable<Tatabouf.Domain.Crew>
+
+@functions{
+    string GetClass(bool checkBox)
+    {
+        if (checkBox)
+        {
+            return "want-to-go";
+        }
+        else
+        {
+            return "dont-want-to-go";
+        }
+    }
+
+    string GetSymbol(bool checkBox)
+    {
+        if (checkBox)
+        {
+            return "=)";
+        }
+        else
+        {
+            return "=(";
+        }
+    }
+}
+
+<table class="tatabouf">
+    <thead>
+        <tr>
+            <td class="empty">&nbsp;</td>
+            <td class="name">Marie <br />Blachère</td>
+            <td class="name">Carrefour</td>
+            <td class="name">Kébab</td>
+            <td class="name">Quick</td>
+            <td class="name">Autres</td>
+            <td class="name">Places <br />voiture</td>
+            <td>Actions</td>
+        </tr>
+    </thead>
+    <tbody>
+
+        @if (Model.Any())
+        {
+            foreach (var date in Model)
+            {
+                <tr>
+                    <td class="label">@date.Name</td>
+                    <td class="@GetClass(date.MarieBlachere)">@GetSymbol(date.MarieBlachere)</td>
+                    <td class="@GetClass(date.Carrefour)">@GetSymbol(date.Carrefour)</td>
+                    <td class="@GetClass(date.Kebab)">@GetSymbol(date.Kebab)</td>
+                    <td class="@GetClass(date.Quick)">@GetSymbol(date.Quick)</td>
+                    <td class="@GetClass(date.Other)">@GetSymbol(date.Other)</td>
+                    <td>@date.NumberOfSeatsAvailable</td>
+                    <td>Éditer</td>
+                </tr>
+            }
+        }
+        <tr>
+            <td colspan="6">
+                @Html.Partial("_Form", new Tatabouf.Domain.Crew())
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,35 @@
+﻿@model Tatabouf.Domain.Crew
+
+<p>
+    @using(Html.BeginForm("Add", "Home", FormMethod.Post))
+    {
+        <table>
+            <tr>
+                <td>
+                    @Html.TextBoxFor(t => t.Name)
+                </td>
+                <td>
+                    @Html.CheckBoxFor(t => t.MarieBlachere)
+                </td>
+                <td>
+                    @Html.CheckBoxFor(t => t.Carrefour)
+                </td>                
+                <td>
+                    @Html.CheckBoxFor(t => t.Kebab)
+                </td>
+                <td>
+                    @Html.CheckBoxFor(t => t.Quick)
+                </td>
+                <td>
+                    @Html.CheckBoxFor(t => t.Other)
+                </td>
+                <td>
+                    @Html.TextBoxFor(t => t.NumberOfSeatsAvailable)
+                </td>
+                <td>
+                    <input type="submit" value="Enregistrer" />
+                </td>
+            </tr>            
+        </table>        
+    }
+</p>

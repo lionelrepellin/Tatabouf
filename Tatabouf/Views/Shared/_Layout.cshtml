@@ -1,0 +1,25 @@
+﻿<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Tatabouf</title>
+    <link rel="stylesheet" href="~/Content/stylesheet.css">
+</head>
+<body>
+    <div class="main">
+        <div class="inner">
+            <header>
+                <h1>Tatabouf</h1>
+            </header>
+            <section>
+                @RenderBody()
+
+                @Scripts.Render("~/bundles/jquery")
+                @RenderSection("scripts", required: false)
+            </section>
+        </div>
+        <!-- /.inner -->
+    </div>
+    <!-- /.main -->
+</body>
+</html>
