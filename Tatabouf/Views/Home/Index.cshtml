@@ -36,11 +36,10 @@
             <td class="name">Quick</td>
             <td class="name">Autres</td>
             <td class="name">Places <br />voiture</td>
-            <td>Actions</td>
+            <td>&nbsp;</td>
         </tr>
     </thead>
-    <tbody>
-
+    <tbody>        
         @if (Model.Any())
         {
             foreach (var date in Model)
@@ -52,13 +51,21 @@
                     <td class="@GetClass(date.Kebab)">@GetSymbol(date.Kebab)</td>
                     <td class="@GetClass(date.Quick)">@GetSymbol(date.Quick)</td>
                     <td class="@GetClass(date.Other)">@GetSymbol(date.Other)</td>
-                    <td>@date.NumberOfSeatsAvailable</td>
-                    <td>Éditer</td>
+                    <td class="number-of-seats"><span>@date.NumberOfSeatsAvailable</span></td>
+                    <td class="actions"><img src="~/Content/edit.png" alt="Editer" class="icon"/>Éditer</td>
                 </tr>
             }
         }
+        else
+        {
+            <tr>
+                <td>
+                    Inscris-toi !
+                </td>
+            </tr>
+        }
         <tr>
-            <td colspan="6">
+            <td colspan="8">
                 @Html.Partial("_Form", new Tatabouf.Domain.Crew())
             </td>
         </tr>

@@ -1,4 +1,4 @@
-﻿@import url(http://fonts.googleapis.com/css?family=Ubuntu);
+@import url(http://fonts.googleapis.com/css?family=Ubuntu:400,300,500,700);
 html,
 body,
 div,
@@ -167,7 +167,7 @@ body {
   font-weight: bold;
 }
 .main .inner section {
-  margin-top: 40px;
+  margin: 40px 0;
 }
 .main .inner section .tatabouf {
   margin: 0 auto;
@@ -219,4 +219,75 @@ body {
 .main .inner section .tatabouf tbody tr td.want-to-go {
   background-color: #9BD999;
   color: #9BD999;
+}
+.main .inner section .tatabouf tbody tr td.number-of-seats span {
+  background-color: #F0F2F4;
+  border: 0;
+  color: #2B3D51;
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  min-height: 30px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 7px;
+  width: 50%;
+}
+.main .inner section .tatabouf tbody tr td.actions {
+  color: #2B3D51;
+  font-weight: bold;
+  font-size: 14px;
+  text-transform: uppercase;
+  width: 200px;
+}
+.main .inner section .tatabouf tbody tr td.actions .icon {
+  margin-right: 10px;
+}
+.main .inner section .tatabouf .formulaire tbody tr {
+  border-bottom: 0;
+}
+.main .inner section .tatabouf .formulaire tbody tr td.say-my-name input {
+  border: 0;
+  color: #A6B2C2;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 5px 0;
+  text-transform: uppercase;
+  width: 100%;
+}
+.main .inner section .tatabouf .formulaire tbody tr td.choice {
+  width: 120px;
+}
+.main .inner section .tatabouf .formulaire tbody tr td.number-of-seats {
+  min-height: 30px;
+}
+.main .inner section .tatabouf .formulaire tbody tr td.number-of-seats input {
+  background-color: #F0F2F4;
+  border: 0;
+  color: #2B3D51;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  padding: 7px;
+  width: 50%;
+}
+.main .inner section .tatabouf .formulaire tbody tr td.actions {
+  color: #2B3D51;
+  font-weight: bold;
+  font-size: 14px;
+  text-transform: uppercase;
+  width: 200px;
+}
+.main .inner section .tatabouf .formulaire tbody tr td.actions input {
+  background: none;
+  border: 0;
+  cursor: pointer;
+  color: #2B3D51;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 0;
+  text-transform: uppercase;
+}
+.main .inner section .tatabouf .formulaire tbody tr td.actions .icon {
+  margin-right: 10px;
 }

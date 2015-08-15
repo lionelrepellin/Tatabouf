@@ -13,7 +13,7 @@ namespace Tatabouf.DAL
         
         static TataboufContext()
         {
-            //Database.SetInitializer<TataboufContext>(null);
+            Database.SetInitializer<TataboufContext>(null);
         }
 
         public TataboufContext()
