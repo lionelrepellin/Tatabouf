@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -11,8 +9,6 @@ namespace Tatabouf.Domain
     {
         public int Id { get; set; }
 
-        //[DisplayName("Nom")]
-        [Required(ErrorMessage="Le nom est obligatoire")]
         public string Name { get; set; }
 
         public bool MarieBlachere { get; set; }

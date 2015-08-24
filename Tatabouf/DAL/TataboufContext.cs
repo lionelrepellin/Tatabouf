@@ -18,7 +18,8 @@ namespace Tatabouf.DAL
 
         public TataboufContext()
             : base("TataboufContext")
-        {            
+        {
+            this.Configuration.LazyLoadingEnabled = false;
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

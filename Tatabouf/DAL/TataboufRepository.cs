@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Practices.Unity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,60 +9,42 @@ namespace Tatabouf.DAL
 {
     public class TataboufRepository
     {
-        public void AddMember(Crew crew)
+        [Dependency]
+        public TataboufContext Context { get; set; }
+
+        public void AddCrew(Crew crew)
         {
-            using (var ctx = new TataboufContext())
-            {
-                ctx.Dates.Add(crew);
-                ctx.SaveChanges();
-            }
+            Context.Dates.Add(crew);
+            Context.SaveChanges();
         }
 
-        public void UpdateDate(Crew crew)
+        public void UpdateCrew(Crew crew)
         {
-            using (var ctx = new TataboufContext())
+            var date = Context.Dates.Where(d => d.Id == crew.Id).SingleOrDefault();
+            if (date != null)
             {
-                var date = ctx.Dates.Where(d => d.Id == crew.Id).SingleOrDefault();
+                date.Carrefour = crew.Carrefour;
+                date.Kebab = crew.Kebab;
+                date.MarieBlachere = crew.MarieBlachere;
+                date.NumberOfSeatsAvailable = crew.NumberOfSeatsAvailable;
+                date.Other = crew.Other;
+                date.Quick = crew.Quick;
 
-                if (date != null)
-                {
-                    date = crew;
-                    ctx.SaveChanges();
-                }
-            }
-        }
-
-        public void RemoveDate(int crewId)
-        {
-            using (var ctx = new TataboufContext())
-            {
-                var date = ctx.Dates.Where(d => d.Id == crewId).SingleOrDefault();
-
-                if (date != null)
-                {
-                    ctx.Dates.Remove(date);
-                    ctx.SaveChanges();
-                }
+                Context.SaveChanges();
             }
         }
 
         public IEnumerable<Crew> FindAllDates()
         {
-            using (var ctx = new TataboufContext())
-            {
-                var now = DateTime.Now.ToString("yyyy-MM-dd");
-                var all = ctx.Dates.OrderByDescending(d => d.Id).Take(30).ToList();
+            var now = DateTime.Now.ToString("yyyy-MM-dd");
+            var all = Context.Dates.OrderByDescending(d => d.Id).Take(30).ToList();
 
-                return all.Where(d => d.InscriptionDate.ToString("yyyy-MM-dd") == now).OrderBy(d => d.InscriptionDate);
-            }
+            return all.Where(d => d.InscriptionDate.ToString("yyyy-MM-dd") == now).OrderBy(d => d.InscriptionDate);            
         }
 
         public Crew FindCrewById(int crewId)
         {
-            using (var ctx = new TataboufContext())
-            {
-                return ctx.Dates.Where(d => d.Id == crewId).SingleOrDefault();
-            }
+            return Context.Dates.Where(d => d.Id == crewId).SingleOrDefault();
         }
     }
 }

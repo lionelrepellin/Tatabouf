@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>Tatabouf</title>
-    <link rel="stylesheet" href="~/Content/stylesheet.css">
+    <link rel="stylesheet" href="~/Content/stylesheet.css">    
 </head>
 <body>
     <div class="main">
@@ -15,11 +15,17 @@
                 @RenderBody()
 
                 @Scripts.Render("~/bundles/jquery")
+                @Scripts.Render("~/bundles/jqueryval")
                 @RenderSection("scripts", required: false)
             </section>
         </div>
         <!-- /.inner -->
     </div>
     <!-- /.main -->
+    <script type="text/javascript">
+    $(function () {
+        $('.actions .edit').on('click', onEditClick);        
+    });
+   </script>
 </body>
 </html>

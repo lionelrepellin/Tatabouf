@@ -1,0 +1,63 @@
+﻿@model Tatabouf.Models.ContainerModel
+
+@*
+    using(Ajax.BeginForm(Model.Crew.ActionName.ToString(), "Home", new AjaxOptions
+    {
+        HttpMethod = "POST",
+        OnFailure = "omg()",
+        OnSuccess = "reload()",
+        UpdateTargetId = "popup",
+        InsertionMode = InsertionMode.Replace
+    }))
+*@
+
+<style>
+    .validation-summary-errors {
+        background: rgba(251, 3, 3, 0.6);
+    }
+</style>
+
+@using (Html.BeginForm(Model.Crew.ActionName.ToString(), "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <table class="formulaire">
+        <tr>
+            <td class="label say-my-name">
+                @if (Model.Crew.ActionName == Tatabouf.Models.Action.Add)
+                {
+                    @Html.EditorFor(t => t.Crew.Name, new { placeholder = "Votre prénom", maxlength = 20 })
+                }
+                else
+                {
+                    @Model.Crew.Name
+                    @Html.HiddenFor(t => t.Crew.Name)
+                }
+            </td>
+            <td class="choice">
+                @Html.CheckBoxFor(t => t.Crew.MarieBlachere)
+            </td>
+            <td class="choice">
+                @Html.CheckBoxFor(t => t.Crew.Carrefour)
+            </td>
+            <td class="choice">
+                @Html.CheckBoxFor(t => t.Crew.Kebab)
+            </td>
+            <td class="choice">
+                @Html.CheckBoxFor(t => t.Crew.Quick)
+            </td>
+            <td class="choice">
+                @Html.CheckBoxFor(t => t.Crew.Other)
+            </td>
+            <td class="choice number-of-seats">
+                @Html.TextBoxFor(t => t.Crew.NumberOfSeatsAvailable, new { maxlength = 2 })
+            </td>
+            <td class="actions">
+                <img src="~/Content/save.png" alt="Enregistrer" class="icon" />
+                <input type="submit" value="Enregistrer" />
+            </td>
+            @Html.HiddenFor(t => t.Crew.Id)
+        </tr>
+    </table>
+    @Html.ValidationSummary()
+}
