@@ -22,7 +22,7 @@ namespace Tatabouf.Attributes
             if (value != null)
             {
                 var nbPlaces = (byte)value;
-                if(nbPlaces > _maxSeats)
+                if (nbPlaces > _maxSeats)
                 {
                     return false;
                 }

@@ -23,6 +23,7 @@ namespace Tatabouf.DAL
             var date = Context.Dates.Where(d => d.Id == crew.Id).SingleOrDefault();
             if (date != null)
             {
+                // name is not updated
                 date.Carrefour = crew.Carrefour;
                 date.Kebab = crew.Kebab;
                 date.MarieBlachere = crew.MarieBlachere;
@@ -34,7 +35,7 @@ namespace Tatabouf.DAL
             }
         }
 
-        public IEnumerable<Crew> FindAllDates()
+        public IEnumerable<Crew> GetAllDates()
         {
             var now = DateTime.Now.ToString("yyyy-MM-dd");
             var all = Context.Dates.OrderByDescending(d => d.Id).Take(30).ToList();

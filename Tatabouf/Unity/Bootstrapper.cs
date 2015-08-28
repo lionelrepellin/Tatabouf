@@ -3,7 +3,7 @@ using Microsoft.Practices.Unity;
 using Unity.Mvc4;
 using Tatabouf.DAL;
 
-namespace Tatabouf
+namespace Tatabouf.Unity
 {
     public static class Bootstrapper
     {

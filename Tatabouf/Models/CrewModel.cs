@@ -8,6 +8,9 @@ using Tatabouf.Attributes;
 
 namespace Tatabouf.Models
 {
+    /// <summary>
+    /// Actions name for Add and Update
+    /// </summary>
     public enum Action
     {
         Add,
@@ -26,8 +29,8 @@ namespace Tatabouf.Models
             }
         }
 
-        [Required(ErrorMessage = "Le nom est obligatoire")]
-        [StringLength(15, ErrorMessage = "15 caractères maximum")]
+        [Required(ErrorMessage = "C'est toi John Doe ?")]
+        [StringLength(15, ErrorMessage = "C'est trop long ! 15 caractères maximum")]
         public string Name { get; set; }
 
         public bool MarieBlachere { get; set; }
@@ -40,7 +43,7 @@ namespace Tatabouf.Models
 
         public bool Other { get; set; }
         
-        [CheckboxControl("Faites votre choix !", 1)]
+        [CheckboxControl("Vas-y coche au moins une case !", 1)]
         public byte CheckboxCount
         {
             get
@@ -54,7 +57,7 @@ namespace Tatabouf.Models
             }            
         }
 
-        [CheckCountOfSeats("Maxi 4 places !", 4)]
+        [CheckCountOfSeats("4 places maximum autorisées : t'as pas un bus !", 4)]
         public byte? NumberOfSeatsAvailable { get; set; }
     }
 }

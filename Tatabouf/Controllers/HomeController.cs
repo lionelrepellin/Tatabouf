@@ -20,7 +20,7 @@ namespace Tatabouf.Controllers
 
         public ActionResult Index()
         {
-            var dates = Repository.FindAllDates();
+            var dates = Repository.GetAllDates();
             var model = new ContainerModel()
             {
                 Crew = new CrewModel(),
@@ -37,7 +37,7 @@ namespace Tatabouf.Controllers
             if (ModelState.IsValid)
             {
                 var crew = Converter.GetCrew(model.Crew);
-                var dates = Repository.FindAllDates();
+                var dates = Repository.GetAllDates();
 
                 if (IsNameExists(crew.Name, dates))
                 {
@@ -53,7 +53,7 @@ namespace Tatabouf.Controllers
             }
             else
             {
-                var dates = Repository.FindAllDates();
+                var dates = Repository.GetAllDates();
                 model.Dates = Converter.GetCrewModels(dates);
                 return View("Index", model);
             }
@@ -87,13 +87,16 @@ namespace Tatabouf.Controllers
             }
             else
             {
-                return View("Form", "Popup", model);
+                // errors are not managed
+                return RedirectToAction("Index");
             }
         }
 
 
         private bool IsNameExists(string name, IEnumerable<Crew> dates)
         {
+            if (!dates.Any()) { return false; }
+
             if (!string.IsNullOrEmpty(name) && dates != null && dates.Any())
             {
                 name = name.ToLower().Trim();

@@ -170,7 +170,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Unity\Bootstrapper.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DAL\CrewConfiguration.cs" />
     <Compile Include="DAL\TataboufContext.cs" />
@@ -179,7 +179,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="HttpContextDisposableLifetimeManager.cs" />
+    <Compile Include="Unity\HttpContextDisposableLifetimeManager.cs" />
     <Compile Include="Models\CrewModel.cs" />
     <Compile Include="Models\ContainerModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -188,7 +188,10 @@
     <Compile Include="Util\Converter.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\edit.png" />
+    <Content Include="Content\favicon.ico" />
     <Content Include="Content\logo.png" />
+    <Content Include="Content\save.png" />
     <Content Include="Content\stylesheet.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -246,6 +249,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Content\stylesheet.less" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -283,7 +287,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Home\Form.cshtml" />
-    <Content Include="Views\Home\AfficheTableau.cshtml" />
+    <Content Include="Views\Home\Dates.cshtml" />
     <Content Include="Views\Shared\Popup.cshtml" />
   </ItemGroup>
   <ItemGroup>

@@ -1,22 +1,5 @@
 ﻿@model Tatabouf.Models.ContainerModel
 
-@*
-    using(Ajax.BeginForm(Model.Crew.ActionName.ToString(), "Home", new AjaxOptions
-    {
-        HttpMethod = "POST",
-        OnFailure = "omg()",
-        OnSuccess = "reload()",
-        UpdateTargetId = "popup",
-        InsertionMode = InsertionMode.Replace
-    }))
-*@
-
-<style>
-    .validation-summary-errors {
-        background: rgba(251, 3, 3, 0.6);
-    }
-</style>
-
 @using (Html.BeginForm(Model.Crew.ActionName.ToString(), "Home", FormMethod.Post))
 {
     @Html.AntiForgeryToken()

@@ -2,34 +2,26 @@
     e.preventDefault();
     $link = $(this);
     var id = $link.data('id');
-    LoadDetails(id);
+    loadDetails(id);
 };
 
-function LoadDetails(idCrew) {
+function loadDetails(idCrew) {
     $.ajax({
         type: "GET",
         url: "/Home/Edit",
         data: { id: idCrew },
-        success: ShowPopup,
+        success: showPopup,
         error: ShowError,
         dataType: "html"
     });
 };
 
-function ShowPopup(result) {
+function showPopup(result) {
     $('#popup').html(result);
+    $('.cache').show();
     $('#popup').show();
 };
 
 function ShowError(xhr, ajaxOptions, thrownError) {
-    alert(xhr.status);
-    alert(thrownError);
-};
-
-function reload() {
-    console.log('reload the page !');
-};
-
-function omg() {
-    console.log('tout est buggué !');
+    alert(xhr.status + ' - ' + thrownError);
 };

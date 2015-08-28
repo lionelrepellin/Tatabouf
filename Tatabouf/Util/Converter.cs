@@ -7,6 +7,7 @@ using Tatabouf.Models;
 
 namespace Tatabouf.Util
 {
+    //TODO replace converter by AutoMapper
     public class Converter
     {
         public static CrewModel GetCrewModel(Crew crew)
