@@ -42,21 +42,9 @@ namespace Tatabouf.Models
         public bool Quick { get; set; }
 
         public bool Other { get; set; }
-        
-        [CheckboxControl("Vas-y coche au moins une case !", 1)]
-        public byte CheckboxCount
-        {
-            get
-            {
-                var count = (MarieBlachere) ? 1 : 0;
-                count += (Carrefour) ? 1 : 0;
-                count += (Kebab) ? 1 : 0;
-                count += (Quick) ? 1 : 0;
-                count += (Other) ? 1 : 0;
-                return (byte)count;
-            }            
-        }
 
+        public bool IGotIt { get; set; }
+        
         [CheckCountOfSeats("4 places maximum autorisées : t'as pas un bus !", 4)]
         public byte? NumberOfSeatsAvailable { get; set; }
 

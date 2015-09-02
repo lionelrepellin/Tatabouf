@@ -18,6 +18,7 @@ CREATE TABLE [dbo].[equipage](
 	[kebab] [bit] NOT NULL,
 	[quick] [bit] NOT NULL,
 	[autre] [bit] NOT NULL,
+	[j_ai_ma_bouffe] [bit] NOT NULL,
 	[nb_places_dispo] [tinyint] NULL,
 	[date_inscription] [datetime] NOT NULL,
 	[ip] [varchar](20) NOT NULL

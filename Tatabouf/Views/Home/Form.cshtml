@@ -32,12 +32,14 @@
             <td class="choice">
                 @Html.CheckBoxFor(t => t.Crew.Other)
             </td>
+            <td class="choice">
+                @Html.CheckBoxFor(t => t.Crew.IGotIt)
+            </td>
             <td class="choice number-of-seats">
                 @Html.TextBoxFor(t => t.Crew.NumberOfSeatsAvailable, new { maxlength = 2 })
             </td>
             <td class="actions">
-                <img src="~/Content/save.png" alt="Enregistrer" class="icon" />
-                <input type="submit" value="Enregistrer" />
+                <img src="~/Content/save.png" alt="Enregistrer" class="icon save" />
             </td>
             @Html.HiddenFor(t => t.Crew.Id)
         </tr>

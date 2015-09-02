@@ -35,6 +35,7 @@
             <td class="name">Kébab</td>
             <td class="name">Quick</td>
             <td class="name">Autres</td>
+            <td class="name">J'ai ma<br />bouffe</td>
             <td class="name">Places <br />voiture</td>
             <td>&nbsp;</td>
         </tr>
@@ -51,6 +52,7 @@
                     <td class="@GetClass(date.Kebab)">@GetSymbol(date.Kebab)</td>
                     <td class="@GetClass(date.Quick)">@GetSymbol(date.Quick)</td>
                     <td class="@GetClass(date.Other)">@GetSymbol(date.Other)</td>
+                    <td class="@GetClass(date.IGotIt)">@GetSymbol(date.IGotIt)</td>
                     <td class="number-of-seats"><span>@date.NumberOfSeatsAvailable</span></td>
                     <td class="actions">                        
                         @if (date.IpAddress == Model.IpVisitor)
@@ -65,7 +67,7 @@
         else
         {
             <tr>
-                <td colspan="8" class="inscris-toi">
+                <td colspan="9" class="inscris-toi">
                     Inscris-toi !
                 </td>
             </tr>

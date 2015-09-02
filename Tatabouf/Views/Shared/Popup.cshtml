@@ -6,3 +6,12 @@
 <div>
     @RenderBody()
 </div>
+
+<script type="text/javascript">
+    $(function () {
+        alert('loaded !');
+        $('img.save').on('click', function () {
+            $("form").submit();
+        });
+    });
+</script>

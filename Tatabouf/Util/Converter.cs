@@ -21,6 +21,7 @@ namespace Tatabouf.Util
                 MarieBlachere = crew.MarieBlachere,
                 Quick = crew.Quick,
                 Other = crew.Other,
+                IGotIt = crew.IGotIt,
                 NumberOfSeatsAvailable = crew.NumberOfSeatsAvailable,
                 IpAddress = crew.IpAddress
             };
@@ -37,6 +38,7 @@ namespace Tatabouf.Util
                 MarieBlachere = model.MarieBlachere,
                 Quick = model.Quick,
                 Other = model.Other,
+                IGotIt = model.IGotIt,
                 NumberOfSeatsAvailable = model.NumberOfSeatsAvailable,
                 IpAddress = model.IpAddress
             };

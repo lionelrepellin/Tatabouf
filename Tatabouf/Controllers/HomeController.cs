@@ -33,11 +33,20 @@ namespace Tatabouf.Controllers
             {
                 var crew = Converter.GetCrew(model.Crew);
                 var dates = Repository.GetAllDates();
+                var errorMessage = crew.CheckAllBoxes();
 
                 if (IsNameExists(crew.Name, dates))
                 {
-                    ModelState.AddModelError("Name", "Le nom existe déjà !");
+                    ModelState.AddModelError("Name", "Le nom existe déjà !");                    
                     model.Dates = Converter.GetCrewModels(dates);
+                    model.IpVisitor = GetIP(Request);
+                    return View("Index", model);
+                }
+                else if (!string.IsNullOrEmpty(errorMessage))
+                {
+                    ModelState.AddModelError("Checkbox", errorMessage);
+                    model.Dates = Converter.GetCrewModels(dates);
+                    model.IpVisitor = GetIP(Request);
                     return View("Index", model);
                 }
                 else
@@ -82,9 +91,12 @@ namespace Tatabouf.Controllers
             {
                 var ip = GetIP(Request);
                 var crew = Converter.GetCrew(model.Crew);
-                Repository.UpdateCrew(crew, ip);
-                
-                logger.Debug(string.Format("Modification de l'utilisateur: {0} par l'IP: {1}", crew.Name, ip));
+
+                if (string.IsNullOrEmpty(crew.CheckAllBoxes()))
+                {
+                    Repository.UpdateCrew(crew, ip);
+                    logger.Debug(string.Format("Modification de l'utilisateur: {0} par l'IP: {1}", crew.Name, ip));
+                }
                 return RedirectToAction("Index");
             }
             else
@@ -94,7 +106,7 @@ namespace Tatabouf.Controllers
             }
         }
 
-        [HttpPost]        
+        [HttpPost]
         public void Remove(int id)
         {
             if (id > 0)
@@ -118,6 +130,6 @@ namespace Tatabouf.Controllers
                 return names.Contains(name);
             }
             return true;
-        }        
+        }
     }
 }

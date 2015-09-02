@@ -11,7 +11,7 @@
     <div class="main">
         <div class="inner">
             <header>
-                <h1>Tatabouf</h1>
+                <h1>Tatabouf ?</h1>
             </header>
             <section>
                 @RenderBody()
@@ -30,6 +30,9 @@
         $('.actions .remove').on('click', showDeletePopup);
         $('#btn-confirm-yes').on('click', onRemoveClick);
         $('#btn-confirm-no').on('click', onCancelClick);
+        $('.formulaire .actions .save').on('click', function () {
+            $("form").submit();
+        });
     });
    </script>
 </body>

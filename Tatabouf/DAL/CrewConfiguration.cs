@@ -24,6 +24,7 @@ namespace Tatabouf.DAL
             Property(t => t.Kebab).HasColumnName("kebab");
             Property(t => t.Quick).HasColumnName("quick");
             Property(t => t.Other).HasColumnName("autre");
+            Property(t => t.IGotIt).HasColumnName("j_ai_ma_bouffe");
             Property(t => t.IpAddress).HasColumnName("ip");
 
             Property(t => t.NumberOfSeatsAvailable).HasColumnName("nb_places_dispo");
