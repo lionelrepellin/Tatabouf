@@ -187,7 +187,6 @@
     <Compile Include="Models\CrewModel.cs" />
     <Compile Include="Models\ContainerModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Attributes\CheckboxControlAttribute.cs" />
     <Compile Include="Attributes\CheckCountOfSeatsAttribute.cs" />
     <Compile Include="Util\Converter.cs" />
   </ItemGroup>
