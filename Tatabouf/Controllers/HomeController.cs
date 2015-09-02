@@ -1,22 +1,16 @@
-﻿using Microsoft.Practices.Unity;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Tatabouf.DAL;
 using Tatabouf.Domain;
 using Tatabouf.Models;
 using Tatabouf.Util;
 
 namespace Tatabouf.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-        [Dependency]
-        public TataboufRepository Repository { get; set; }
-        
 
         public ActionResult Index()
         {
@@ -24,7 +18,8 @@ namespace Tatabouf.Controllers
             var model = new ContainerModel()
             {
                 Crew = new CrewModel(),
-                Dates = Converter.GetCrewModels(dates)
+                Dates = Converter.GetCrewModels(dates),
+                IpVisitor = GetIP(Request)
             };
             return View(model);
         }
@@ -47,7 +42,10 @@ namespace Tatabouf.Controllers
                 }
                 else
                 {
+                    crew.IpAddress = GetIP(Request);
                     Repository.AddCrew(crew);
+
+                    logger.Debug(string.Format("Ajout de l'utilisateur: {0} par l'IP: {1}", crew.Name, crew.IpAddress));
                     return RedirectToAction("Index");
                 }
             }
@@ -67,7 +65,8 @@ namespace Tatabouf.Controllers
             {
                 var container = new ContainerModel
                 {
-                    Crew = Converter.GetCrewModel(crew)
+                    Crew = Converter.GetCrewModel(crew),
+                    IpVisitor = GetIP(Request)
                 };
                 return View("Form", "Popup", container);
             }
@@ -81,8 +80,11 @@ namespace Tatabouf.Controllers
         {
             if (ModelState.IsValid)
             {
+                var ip = GetIP(Request);
                 var crew = Converter.GetCrew(model.Crew);
-                Repository.UpdateCrew(crew);
+                Repository.UpdateCrew(crew, ip);
+                
+                logger.Debug(string.Format("Modification de l'utilisateur: {0} par l'IP: {1}", crew.Name, ip));
                 return RedirectToAction("Index");
             }
             else
@@ -92,7 +94,19 @@ namespace Tatabouf.Controllers
             }
         }
 
+        [HttpPost]        
+        public void Remove(int id)
+        {
+            if (id > 0)
+            {
+                var ip = GetIP(Request);
+                logger.Debug(string.Format("Suppression de l'utilisateur id: {0} par l'IP: {1}", id, ip));
+                Repository.DeleteCrew(id, ip);
+            }
+        }
 
+
+        // Check if name already exists in registered dates for the current day
         private bool IsNameExists(string name, IEnumerable<Crew> dates)
         {
             if (!dates.Any()) { return false; }
@@ -104,6 +118,6 @@ namespace Tatabouf.Controllers
                 return names.Contains(name);
             }
             return true;
-        }
+        }        
     }
 }

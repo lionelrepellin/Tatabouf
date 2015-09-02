@@ -25,6 +25,8 @@ namespace Tatabouf.Domain
 
         public DateTime InscriptionDate { get; set; }
 
+        public string IpAddress { get; set; }
+
         public Crew()
         {
             InscriptionDate = DateTime.Now;

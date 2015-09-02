@@ -26,12 +26,6 @@
     }
 }
 
-<style>
-    .edit {
-        cursor: pointer;
-    }
-</style>
-
 <table class="tatabouf">
     <thead>
         <tr>
@@ -58,7 +52,13 @@
                     <td class="@GetClass(date.Quick)">@GetSymbol(date.Quick)</td>
                     <td class="@GetClass(date.Other)">@GetSymbol(date.Other)</td>
                     <td class="number-of-seats"><span>@date.NumberOfSeatsAvailable</span></td>
-                    <td class="actions"><img src="~/Content/edit.png" alt="Éditer" class="icon" /><span class="edit" data-id="@date.Id">Éditer</span></td>
+                    <td class="actions">                        
+                        @if (date.IpAddress == Model.IpVisitor)
+                        {
+                            <img src="~/Content/edit.png" alt="Éditer" class="icon edit" data-id="@date.Id"/>
+                            <img src="~/Content/delete.png" alt="Supprimer" class="icon remove" data-id="@date.Id"/>
+                        }
+                    </td>
                 </tr>
             }
         }

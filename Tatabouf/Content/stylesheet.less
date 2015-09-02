@@ -179,18 +179,21 @@ body{
                                 font-weight: bold;
                                 font-size: 14px;
                                 text-transform: uppercase;
+                                text-align: center;
                                 width: 200px;
                                 .icon{
-                                    margin-right: 10px;
+                                    cursor: pointer;
+                                    margin-right: 30px;
+                                    &:last-child{ margin-right: 0; }                                    
                                 }
                             }
                             &.inscris-toi{
-                                color: #2B3D51;
+                                color: #2B3D51; 
                                 font-weight: bold;
                                 text-transform: uppercase;
                             }
                         }
-                    }
+                    } 
                 }
             }
             // Formulaire
@@ -261,7 +264,7 @@ body{
                 }
             }
             // Edition
-            #popup{
+            .popup{
                 box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.16);
                 background-color: #FFF;
                 left: 0;
@@ -278,7 +281,33 @@ body{
                         &.say-my-name{
                             padding-left: 20px;
                             text-align: left;
+                        }                        
+                    }
+                }                
+                &.delete{
+                    width: 500px;
+                    p{
+                        padding: 20px;
+                    }
+                    .actions{
+                        text-align: center;
+                        margin-bottom: 20px;
+                        button{
+                            border: 1px solid #2b3d51;
+                            background: none;
+                            cursor: pointer; 
+                            font-weight: bold;
+                            margin-right: 20px;
+                            padding: 7px 20px;
+                            text-transform: uppercase;
+                            &:hover{
+                                background-color: #F1F1F1;
+                            }
                         }
+                    }
+                    &:before{
+                        content: 'Supprimer';
+                        width: 460px;
                     }
                 }
                 &:before{

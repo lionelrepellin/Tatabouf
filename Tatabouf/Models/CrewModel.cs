@@ -59,5 +59,7 @@ namespace Tatabouf.Models
 
         [CheckCountOfSeats("4 places maximum autorisées : t'as pas un bus !", 4)]
         public byte? NumberOfSeatsAvailable { get; set; }
+
+        public string IpAddress { get; set; }
     }
 }

@@ -20,6 +20,7 @@ CREATE TABLE [dbo].[equipage](
 	[autre] [bit] NOT NULL,
 	[nb_places_dispo] [tinyint] NULL,
 	[date_inscription] [datetime] NOT NULL,
+	[ip] [varchar](20) NOT NULL
  CONSTRAINT [PK_dbo.equipage] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC

@@ -26,7 +26,10 @@
     <!-- /.main -->
     <script type="text/javascript">
     $(function () {
-        $('.actions .edit').on('click', onEditClick);        
+        $('.actions .edit').on('click', onEditClick);
+        $('.actions .remove').on('click', showDeletePopup);
+        $('#btn-confirm-yes').on('click', onRemoveClick);
+        $('#btn-confirm-no').on('click', onCancelClick);
     });
    </script>
 </body>

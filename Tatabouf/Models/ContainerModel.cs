@@ -10,5 +10,7 @@ namespace Tatabouf.Models
         public CrewModel Crew { get; set; }
 
         public IEnumerable<CrewModel> Dates { get; set; }
+
+        public string IpVisitor { get; set; }
     }
 }

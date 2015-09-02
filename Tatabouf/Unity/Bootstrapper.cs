@@ -22,25 +22,10 @@ namespace Tatabouf.Unity
 
             // register all your components with the container here
             // it is NOT necessary to register your controllers
-            RegisterType<TataboufRepository>(container);
-            RegisterType<TataboufContext>(container);
+            container.RegisterType<TataboufRepository>();
+            container.RegisterType<TataboufContext>();
             
             return container;
-        }
-
-        private static void RegisterType<T>(IUnityContainer container)
-        {
-            container.RegisterType<T>(new HttpContextDisposableLifetimeManager(typeof(T).FullName));
-        }
-
-        private static void RegisterType<I, T>(IUnityContainer container) where T : I
-        {
-            container.RegisterType<I, T>(new HttpContextDisposableLifetimeManager(typeof(I).FullName));
-        }
-
-        private static void RegisterType<I, T>(IUnityContainer container, string name) where T : I
-        {
-            container.RegisterType<I, T>(name, new HttpContextDisposableLifetimeManager(name));
         }
     }
 }

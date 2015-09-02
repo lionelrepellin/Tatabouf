@@ -166,7 +166,7 @@ body {
   width: 1200px;
 }
 .main .inner header {
-  background: url("logo.png") center center no-repeat;
+  background: url("/Content/logo.png") center center no-repeat;
   border-bottom: 1px solid #C9D5E5;
   height: 100px;
   line-height: 100px;
@@ -249,10 +249,15 @@ body {
   font-weight: bold;
   font-size: 14px;
   text-transform: uppercase;
+  text-align: center;
   width: 200px;
 }
 .main .inner section .tatabouf tbody tr td.actions .icon {
-  margin-right: 10px;
+  cursor: pointer;
+  margin-right: 30px;
+}
+.main .inner section .tatabouf tbody tr td.actions .icon:last-child {
+  margin-right: 0;
 }
 .main .inner section .tatabouf tbody tr td.inscris-toi {
   color: #2B3D51;
@@ -323,7 +328,7 @@ body {
 .main .inner section .formulaire tbody tr td.actions .icon {
   margin-right: 10px;
 }
-.main .inner section #popup {
+.main .inner section .popup {
   box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.16);
   background-color: #FFF;
   left: 0;
@@ -335,14 +340,40 @@ body {
   transform: translateY(-50%);
   width: 1120px;
 }
-.main .inner section #popup tr {
+.main .inner section .popup tr {
   border: 0;
 }
-.main .inner section #popup tr td.say-my-name {
+.main .inner section .popup tr td.say-my-name {
   padding-left: 20px;
   text-align: left;
 }
-.main .inner section #popup:before {
+.main .inner section .popup.delete {
+  width: 500px;
+}
+.main .inner section .popup.delete p {
+  padding: 20px;
+}
+.main .inner section .popup.delete .actions {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.main .inner section .popup.delete .actions button {
+  border: 1px solid #2b3d51;
+  background: none;
+  cursor: pointer;
+  font-weight: bold;
+  margin-right: 20px;
+  padding: 7px 20px;
+  text-transform: uppercase;
+}
+.main .inner section .popup.delete .actions button:hover {
+  background-color: #F1F1F1;
+}
+.main .inner section .popup.delete:before {
+  content: 'Supprimer';
+  width: 460px;
+}
+.main .inner section .popup:before {
   content: 'Éditer';
   background: #FFF;
   border-bottom: 1px solid #BABABA;

@@ -6,4 +6,12 @@
 
 @Html.Partial("Form", Model)
 
-<div id="popup" style="display:none;"></div>
+<div id="popup" class="popup" style="display:none;"></div>
+
+<div id="confirmDelete" class="popup delete" style="display:none;">
+    <p>Etes-vous sûr de supprimer cet enregistrement ?</p>
+    <div class="actions">
+    <button id="btn-confirm-yes">Oui</button>
+    <button id="btn-confirm-no">Non</button>
+    </div>
+</div>

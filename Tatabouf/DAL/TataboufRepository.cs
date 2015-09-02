@@ -18,18 +18,18 @@ namespace Tatabouf.DAL
             Context.SaveChanges();
         }
 
-        public void UpdateCrew(Crew crew)
+        public void UpdateCrew(Crew crew, string ipToCompare)
         {
-            var date = Context.Dates.Where(d => d.Id == crew.Id).SingleOrDefault();
-            if (date != null)
+            var crewToUpdate = FindCrewById(crew.Id);
+            if (crewToUpdate != null && crewToUpdate.IpAddress == ipToCompare)
             {
                 // name is not updated
-                date.Carrefour = crew.Carrefour;
-                date.Kebab = crew.Kebab;
-                date.MarieBlachere = crew.MarieBlachere;
-                date.NumberOfSeatsAvailable = crew.NumberOfSeatsAvailable;
-                date.Other = crew.Other;
-                date.Quick = crew.Quick;
+                crewToUpdate.Carrefour = crew.Carrefour;
+                crewToUpdate.Kebab = crew.Kebab;
+                crewToUpdate.MarieBlachere = crew.MarieBlachere;
+                crewToUpdate.NumberOfSeatsAvailable = crew.NumberOfSeatsAvailable;
+                crewToUpdate.Other = crew.Other;
+                crewToUpdate.Quick = crew.Quick;
 
                 Context.SaveChanges();
             }
@@ -40,12 +40,22 @@ namespace Tatabouf.DAL
             var now = DateTime.Now.ToString("yyyy-MM-dd");
             var all = Context.Dates.OrderByDescending(d => d.Id).Take(30).ToList();
 
-            return all.Where(d => d.InscriptionDate.ToString("yyyy-MM-dd") == now).OrderBy(d => d.InscriptionDate);            
+            return all.Where(d => d.InscriptionDate.ToString("yyyy-MM-dd") == now).OrderBy(d => d.InscriptionDate);
         }
 
         public Crew FindCrewById(int crewId)
         {
             return Context.Dates.Where(d => d.Id == crewId).SingleOrDefault();
+        }
+
+        public void DeleteCrew(int crewId, string ipToCompare)
+        {
+            var crewToRemove = FindCrewById(crewId);
+            if (crewToRemove != null && crewToRemove.IpAddress == ipToCompare)
+            {
+                Context.Dates.Remove(crewToRemove);
+                Context.SaveChanges();
+            }
         }
     }
 }
