@@ -7,7 +7,16 @@ using Tatabouf.Domain;
 
 namespace Tatabouf.DAL
 {
-    public class TataboufRepository
+    public interface ITataboufRepository
+    {
+        void AddCrew(Crew crew);
+        void UpdateCrew(Crew crew, string ipToCompare);
+        IEnumerable<Crew> GetAllDates();
+        Crew FindCrewById(int crewId);
+        void DeleteCrew(int crewId, string ipToCompare);
+    }
+
+    public class TataboufRepository : ITataboufRepository
     {
         [Dependency]
         public TataboufContext Context { get; set; }

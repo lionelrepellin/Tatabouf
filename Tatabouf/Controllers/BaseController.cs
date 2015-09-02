@@ -12,12 +12,15 @@ namespace Tatabouf.Controllers
     public abstract class BaseController : Controller
     {
         [Dependency]
-        public TataboufRepository Repository { get; set; }
+        public ITataboufRepository Repository { get; set; }
 
         protected static Logger logger = LogManager.GetCurrentClassLogger();
 
         protected static string GetIP(HttpRequestBase httpRequestBase)
         {
+            //TODO for test purpose only
+            if (httpRequestBase == null) return string.Empty;
+            
             string ip = httpRequestBase.ServerVariables["HTTP_X_FORWARDED_FOR"];
             if (string.IsNullOrEmpty(ip))
             {
