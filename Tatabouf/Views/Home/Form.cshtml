@@ -18,22 +18,22 @@
                 }
             </td>
             <td class="choice">
-                @Html.CheckBoxFor(t => t.Crew.MarieBlachere)
+                @Html.CheckBoxFor(t => t.Crew.IGotIt)
             </td>
             <td class="choice">
                 @Html.CheckBoxFor(t => t.Crew.Carrefour)
             </td>
             <td class="choice">
-                @Html.CheckBoxFor(t => t.Crew.Kebab)
-            </td>
-            <td class="choice">
                 @Html.CheckBoxFor(t => t.Crew.Quick)
             </td>
             <td class="choice">
-                @Html.CheckBoxFor(t => t.Crew.Other)
+                @Html.CheckBoxFor(t => t.Crew.MarieBlachere)
             </td>
             <td class="choice">
-                @Html.CheckBoxFor(t => t.Crew.IGotIt)
+                @Html.CheckBoxFor(t => t.Crew.Kebab)
+            </td>
+            <td class="choice">
+                @Html.CheckBoxFor(t => t.Crew.Other)
             </td>
             <td class="choice number-of-seats">
                 @Html.TextBoxFor(t => t.Crew.NumberOfSeatsAvailable, new { maxlength = 2 })

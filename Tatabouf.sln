@@ -5,7 +5,7 @@ VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tatabouf", "Tatabouf\Tatabouf.csproj", "{28556546-FD81-431F-A10B-97CC8AC61F43}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tatabouf.Tests", "Tatabouf.Test\Tatabouf.Tests.csproj", "{D550A648-8A74-40A6-9F4E-51D11A6A4A9C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tatabouf.Tests", "Tatabouf.Tests\Tatabouf.Tests.csproj", "{D550A648-8A74-40A6-9F4E-51D11A6A4A9C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

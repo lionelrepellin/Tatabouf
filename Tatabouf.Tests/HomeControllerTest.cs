@@ -27,7 +27,7 @@ namespace Tatabouf.Tests
         }
 
         [TestMethod]
-        public void AddWithSameName()
+        public void Controller_AddWithSameName()
         {
             var model = new ContainerModel
             {
@@ -43,7 +43,7 @@ namespace Tatabouf.Tests
         }
 
         [TestMethod]
-        public void AddWithNameButNoChoice()
+        public void Controller_AddWithNameButNoChoice()
         {
             var model = new ContainerModel
             {
@@ -59,7 +59,7 @@ namespace Tatabouf.Tests
 
 
         [TestMethod]
-        public void AddWithNameButToMuchChoices()
+        public void Controller_AddWithNameButToMuchChoices()
         {
             var model = new ContainerModel
             {
@@ -76,7 +76,7 @@ namespace Tatabouf.Tests
         }
 
         [TestMethod]
-        public void AddWithNameButToMuchChoicesAndSeats()
+        public void Controller_AddWithNameButToMuchChoicesAndSeats()
         {
             var model = new ContainerModel
             {
@@ -93,7 +93,7 @@ namespace Tatabouf.Tests
         }
 
         [TestMethod]
-        public void AddIGotIt()
+        public void Controller_AddIGotIt()
         {
             var model = new ContainerModel
             {
@@ -110,7 +110,7 @@ namespace Tatabouf.Tests
         }
 
         [TestMethod]
-        public void AddOneOrMoreChoices()
+        public void Controller_AddOneOrMoreChoices()
         {
             var model = new ContainerModel
             {
@@ -128,7 +128,7 @@ namespace Tatabouf.Tests
         }
 
         [TestMethod]
-        public void AddOneOrMoreChoicesAndSeats()
+        public void Controller_AddOneOrMoreChoicesAndSeats()
         {
             var model = new ContainerModel
             {

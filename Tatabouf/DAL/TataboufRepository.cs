@@ -32,13 +32,14 @@ namespace Tatabouf.DAL
             var crewToUpdate = FindCrewById(crew.Id);
             if (crewToUpdate != null && crewToUpdate.IpAddress == ipToCompare)
             {
-                // name is not updated
+                // name and ip address are not updated
                 crewToUpdate.Carrefour = crew.Carrefour;
                 crewToUpdate.Kebab = crew.Kebab;
                 crewToUpdate.MarieBlachere = crew.MarieBlachere;
                 crewToUpdate.NumberOfSeatsAvailable = crew.NumberOfSeatsAvailable;
                 crewToUpdate.Other = crew.Other;
                 crewToUpdate.Quick = crew.Quick;
+                crewToUpdate.IGotIt = crew.IGotIt;
 
                 Context.SaveChanges();
             }

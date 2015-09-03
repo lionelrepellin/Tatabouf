@@ -30,12 +30,12 @@
     <thead>
         <tr>
             <td class="empty">&nbsp;</td>
-            <td class="name">Marie <br />Blachère</td>
+            <td class="name">J'ai ma<br />bouffe</td>            
             <td class="name">Carrefour</td>
-            <td class="name">Kébab</td>
             <td class="name">Quick</td>
+            <td class="name">Marie <br />Blachère</td>
+            <td class="name">Kébab</td>            
             <td class="name">Autres</td>
-            <td class="name">J'ai ma<br />bouffe</td>
             <td class="name">Places <br />voiture</td>
             <td>&nbsp;</td>
         </tr>
@@ -47,18 +47,18 @@
             {
                 <tr>
                     <td class="label">@date.Name</td>
-                    <td class="@GetClass(date.MarieBlachere)">@GetSymbol(date.MarieBlachere)</td>
-                    <td class="@GetClass(date.Carrefour)">@GetSymbol(date.Carrefour)</td>
-                    <td class="@GetClass(date.Kebab)">@GetSymbol(date.Kebab)</td>
-                    <td class="@GetClass(date.Quick)">@GetSymbol(date.Quick)</td>
-                    <td class="@GetClass(date.Other)">@GetSymbol(date.Other)</td>
                     <td class="@GetClass(date.IGotIt)">@GetSymbol(date.IGotIt)</td>
+                    <td class="@GetClass(date.Carrefour)">@GetSymbol(date.Carrefour)</td>
+                    <td class="@GetClass(date.Quick)">@GetSymbol(date.Quick)</td>
+                    <td class="@GetClass(date.MarieBlachere)">@GetSymbol(date.MarieBlachere)</td>
+                    <td class="@GetClass(date.Kebab)">@GetSymbol(date.Kebab)</td>                    
+                    <td class="@GetClass(date.Other)">@GetSymbol(date.Other)</td>
                     <td class="number-of-seats"><span>@date.NumberOfSeatsAvailable</span></td>
-                    <td class="actions">                        
+                    <td class="actions">
                         @if (date.IpAddress == Model.IpVisitor)
                         {
-                            <img src="~/Content/edit.png" alt="Éditer" class="icon edit" data-id="@date.Id"/>
-                            <img src="~/Content/delete.png" alt="Supprimer" class="icon remove" data-id="@date.Id"/>
+                            <img src="~/Content/edit.png" alt="Éditer" class="icon edit" data-id="@date.Id" />
+                            <img src="~/Content/delete.png" alt="Supprimer" class="icon remove" data-id="@date.Id" />
                         }
                     </td>
                 </tr>

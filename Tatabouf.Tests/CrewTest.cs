@@ -12,7 +12,7 @@ namespace Tatabouf.Tests
     public class CrewTest
     {
         [TestMethod]
-        public void NoChoice()
+        public void Crew_NoChoice()
         {
             var crew = new Crew();
             var errorMessage = crew.CheckAllBoxes();
@@ -20,7 +20,7 @@ namespace Tatabouf.Tests
         }
 
         [TestMethod]
-        public void AllBoxChecked()
+        public void Crew_AllBoxChecked()
         {
             var crew = new Crew();
             crew.Kebab = true;
@@ -34,7 +34,7 @@ namespace Tatabouf.Tests
         }
 
         [TestMethod]
-        public void OneBoxCheckedAndIGotIt()
+        public void Crew_OneBoxCheckedAndIGotIt()
         {
             var crew = new Crew();
             crew.Kebab = true;
@@ -44,7 +44,7 @@ namespace Tatabouf.Tests
         }
 
         [TestMethod]
-        public void IGotIt()
+        public void Crew_IGotIt()
         {
             var crew = new Crew();
             crew.IGotIt = true;
@@ -53,7 +53,7 @@ namespace Tatabouf.Tests
         }
 
         [TestMethod]
-        public void OneBoxChecked()
+        public void Crew_OneBoxChecked()
         {
             var crew = new Crew();
             crew.Other = true;
@@ -62,7 +62,7 @@ namespace Tatabouf.Tests
         }
 
         [TestMethod]
-        public void OneOrMoreBoxChecked()
+        public void Crew_OneOrMoreBoxChecked()
         {
             var crew = new Crew();
             crew.Other = true;
@@ -72,7 +72,7 @@ namespace Tatabouf.Tests
         }
 
         [TestMethod]
-        public void IGotItAndOneSeatAvailable()
+        public void Crew_IGotItAndOneSeatAvailable()
         {
             var crew = new Crew();
             crew.IGotIt = true;
@@ -82,7 +82,7 @@ namespace Tatabouf.Tests
         }
 
         [TestMethod]
-        public void IGotItAndOneOrMoreBoxCheckedAndSeatsAvailable()
+        public void Crew_IGotItAndOneOrMoreBoxCheckedAndSeatsAvailable()
         {
             var crew = new Crew();
             crew.IGotIt = true;

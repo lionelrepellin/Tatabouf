@@ -16,7 +16,7 @@ namespace Tatabouf.Controllers
 
         protected static Logger logger = LogManager.GetCurrentClassLogger();
 
-        protected static string GetIP(HttpRequestBase httpRequestBase)
+        protected string GetIP(HttpRequestBase httpRequestBase)
         {
             //TODO for test purpose only
             if (httpRequestBase == null) return string.Empty;

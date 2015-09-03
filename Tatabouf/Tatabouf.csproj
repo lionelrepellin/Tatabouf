@@ -297,7 +297,7 @@
     </Content>
     <Content Include="Views\Home\Form.cshtml" />
     <Content Include="Views\Home\Dates.cshtml" />
-    <Content Include="Views\Shared\Popup.cshtml" />
+    <Content Include="Views\Home\Popup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
