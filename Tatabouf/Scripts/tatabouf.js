@@ -8,7 +8,7 @@
 function loadDetails(idCrew) {
     $.ajax({
         type: "GET",
-        url: "/Home/Edit",
+        url: "http://10.1.136.214/Tatabouf/Home/Edit",
         data: { id: idCrew },
         success: showPopup,
         error: ShowError,
@@ -35,10 +35,10 @@ function onRemoveClick(e) {
 function removeItem(idCrew) {
     $.ajax({
         type: "POST",
-        url: "/Home/Remove",
+        url: "http://10.1.136.214/Tatabouf/Home/Remove",
         data: { id: idCrew },
         success: function () {
-            document.location = "/Home";
+            document.location = "http://10.1.136.214/Tatabouf/Home";
         },
         error: ShowError
     });

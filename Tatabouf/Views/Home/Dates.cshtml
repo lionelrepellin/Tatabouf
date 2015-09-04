@@ -12,6 +12,18 @@
             return "dont-want-to-go";
         }
     }
+    
+    string GetClassIGotIt(bool checkBox)
+    {
+        if (checkBox)
+        {
+            return "i-got-it";
+        }
+        else
+        {
+            return "dont-want-to-go";
+        }
+    }
 
     string GetSymbol(bool checkBox)
     {
@@ -37,7 +49,7 @@
             <td class="name">Kébab</td>            
             <td class="name">Autres</td>
             <td class="name">Places <br />voiture</td>
-            <td>&nbsp;</td>
+            <td width="120">&nbsp;</td>
         </tr>
     </thead>
     <tbody>
@@ -47,7 +59,7 @@
             {
                 <tr>
                     <td class="label">@date.Name</td>
-                    <td class="@GetClass(date.IGotIt)">@GetSymbol(date.IGotIt)</td>
+                    <td class="@GetClassIGotIt(date.IGotIt)">@GetSymbol(date.IGotIt)</td>
                     <td class="@GetClass(date.Carrefour)">@GetSymbol(date.Carrefour)</td>
                     <td class="@GetClass(date.Quick)">@GetSymbol(date.Quick)</td>
                     <td class="@GetClass(date.MarieBlachere)">@GetSymbol(date.MarieBlachere)</td>

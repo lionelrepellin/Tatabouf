@@ -35,6 +35,7 @@ namespace Tatabouf.Controllers
                 var dates = Repository.GetAllDates();
                 var errorMessage = crew.CheckAllBoxes();
 
+                // TODO refactor
                 if (IsNameExists(crew.Name, dates))
                 {
                     ModelState.AddModelError("Name", "Le nom existe déjà !");                    

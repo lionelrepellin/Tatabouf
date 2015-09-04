@@ -11,7 +11,7 @@ using System.Resources;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Tatabouf.Tests")]
-[assembly: AssemblyCopyright("Copyright © Lionel Repellin / Jimmy Burebure")]
+[assembly: AssemblyCopyright("Copyright © Lionel Repellin / Jimmy Burbure")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
