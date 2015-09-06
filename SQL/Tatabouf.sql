@@ -34,7 +34,7 @@ GO
 CREATE TABLE [dbo].[user](
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[name] [varchar](30) NOT NULL,
-	[i_got_my_lunch] [bit] NOT NULL,
+	[i_have_my_lunch] [bit] NOT NULL,
 	[available_seats] [tinyint] NULL,
 	[inscription_date] [datetime] NOT NULL,
 	[ip_address] [varchar](20) NOT NULL,

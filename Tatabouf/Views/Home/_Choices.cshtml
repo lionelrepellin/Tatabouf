@@ -9,11 +9,11 @@
 }
 
 @functions{
-    string GetClassIGotIt(bool checkBox)
+    string GetClassIHaveMyLunch(bool checkBox)
     {
         if (checkBox)
         {
-            return "i-got-it";
+            return "i-have-it";
         }
         else
         {
@@ -60,7 +60,7 @@
             {
                 <tr>
                     <td class="label">@user.Name</td>
-                    <td class="@GetClassIGotIt(user.IGotIt)">@GetSymbol(user.IGotIt)</td>
+                    <td class="@GetClassIHaveMyLunch(user.IBroughtMyLunch)">@GetSymbol(user.IBroughtMyLunch)</td>
                     @foreach (var place in Model.AllPlaces)
                     {
                         if (IsPlaceSelected(user.Choices, place.Id))
@@ -74,7 +74,7 @@
                     }                    
                     <td class="number-of-seats"><span>@user.NumberOfAvailableSeats</span></td>
                     <td class="actions">
-                        @if (user.Ip == Model.IpVisitor)
+                        @if (user.IP == Model.IpVisitor)
                         {
                             <img src="~/Content/edit.png" alt="Éditer" class="icon edit" data-id="@user.Id" />
                             <img src="~/Content/delete.png" alt="Supprimer" class="icon remove" data-id="@user.Id" />

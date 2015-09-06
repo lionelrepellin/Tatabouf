@@ -79,12 +79,12 @@ namespace Tatabouf.Tests.Business
         }
 
         [TestMethod]
-        public void ControlCheckBoxes_IGotMyLunchAndOtherChoice()
+        public void ControlCheckBoxes_IHaveMyLunchAndOtherChoice()
         {
             var errorMessage = string.Empty;
             var user = new User
             {
-                IGotMyLunch = true,
+                IHaveMyLunch = true,
                 SelectedPlaces = new List<Place> { new Place { Label = "Carrefour" } }
             };
 
@@ -96,12 +96,12 @@ namespace Tatabouf.Tests.Business
         }
 
         [TestMethod]
-        public void ControlCheckBoxes_IGotMyLunchAndAvailableSeats()
+        public void ControlCheckBoxes_IHaveMyLunchAndAvailableSeats()
         {
             var errorMessage = string.Empty;
             var user = new User
             {
-                IGotMyLunch = true,
+                IHaveMyLunch = true,
                 AvailableSeats = 2
             };
 
@@ -118,7 +118,7 @@ namespace Tatabouf.Tests.Business
             var errorMessage = string.Empty;
             var user = new User
             {
-                IGotMyLunch = true,
+                IHaveMyLunch = true,
                 AvailableSeats = 2,
                 SelectedPlaces = new List<Place> { 
                     new Place { Label = "Carrefour" },
@@ -135,12 +135,12 @@ namespace Tatabouf.Tests.Business
         }
 
         [TestMethod]
-        public void ControlCheckBoxes_IGotMyLunch()
+        public void ControlCheckBoxes_IHaveMyLunch()
         {
             var errorMessage = string.Empty;
             var user = new User
             {
-                IGotMyLunch = true
+                IHaveMyLunch = true
             };
 
             var service = new ValidationService();

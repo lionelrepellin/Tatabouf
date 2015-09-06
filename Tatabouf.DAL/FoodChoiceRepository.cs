@@ -21,17 +21,17 @@ namespace Tatabouf.DAL
     public class FoodChoiceRepository : IFoodChoiceRepository
     {
         [Dependency]
-        public MainContext Context { get; set; }
+        public TataboufContext TataboufContext { get; set; }
 
         public void Add(User user)
         {
-            Context.Users.Add(user);
-            Context.SaveChanges();
+            TataboufContext.Users.Add(user);
+            TataboufContext.SaveChanges();
         }
 
         public User FindById(int userId)
         {
-            return Context.Users
+            return TataboufContext.Users
                             .Include(m => m.SelectedPlaces)
                             .Where(m => m.Id == userId)
                             .SingleOrDefault();
@@ -39,7 +39,7 @@ namespace Tatabouf.DAL
 
         public IEnumerable<User> GetUsersChoices(DateTime beginDate, DateTime endDate)
         {
-            return Context.Users
+            return TataboufContext.Users
                             .Include(m => m.SelectedPlaces)
                             .Where(m => m.InscriptionDate >= beginDate && m.InscriptionDate < endDate)
                             .OrderBy(m => m.Id).ToList();
@@ -47,28 +47,28 @@ namespace Tatabouf.DAL
 
         public void Delete(User user)
         {
-            Context.Users.Remove(user);
-            Context.SaveChanges();
+            TataboufContext.Users.Remove(user);
+            TataboufContext.SaveChanges();
         }
 
         public IEnumerable<Place> GetPlaces()
         {
-            return Context.Places.OrderBy(p => p.DisplayOrder).ToList();
+            return TataboufContext.Places.OrderBy(p => p.DisplayOrder).ToList();
         }
 
         public IEnumerable<Place> FindPlacesByIds(List<int> placesId)
         {
-            return Context.Places.Where(p => placesId.Contains(p.Id)).ToList();
+            return TataboufContext.Places.Where(p => placesId.Contains(p.Id)).ToList();
         }
 
         public void Update(User originalUser, User newUser)
         {
             // name and ip address are not updated
             // inscription date is not updated
-            originalUser.IGotMyLunch = newUser.IGotMyLunch;
+            originalUser.IHaveMyLunch = newUser.IHaveMyLunch;
             originalUser.AvailableSeats = newUser.AvailableSeats;
             originalUser.SelectedPlaces = newUser.SelectedPlaces;
-            Context.SaveChanges();
+            TataboufContext.SaveChanges();
         }
     }
 }

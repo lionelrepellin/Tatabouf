@@ -10,7 +10,7 @@ namespace Tatabouf.Models
         public UserModel FoodChoice { get; set; }
 
         /// <summary>
-        /// users and their choices
+        /// all users and their choices
         /// </summary>
         public IEnumerable<UserModel> UsersChoices { get; set; }
 

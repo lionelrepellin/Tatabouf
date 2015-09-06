@@ -72,7 +72,7 @@
     <Compile Include="Configurations\PlaceConfiguration.cs" />
     <Compile Include="Configurations\UserConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MainContext.cs" />
+    <Compile Include="TataboufContext.cs" />
     <Compile Include="FoodChoiceRepository.cs" />
   </ItemGroup>
   <ItemGroup>

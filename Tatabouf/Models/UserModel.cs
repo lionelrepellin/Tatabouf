@@ -30,13 +30,13 @@ namespace Tatabouf.Models
         public string Name { get; set; }
 
         public IEnumerable<PlaceModel> Choices { get; set; }
-
-        public bool IGotIt { get; set; }
+        
+        public bool IBroughtMyLunch { get; set; }
         
         [CheckNumberOfSeats("4 places maxi autorisées: t'as pas un bus !", 4)]
         public byte? NumberOfAvailableSeats { get; set; }
 
-        public string Ip { get; set; }
+        public string IP { get; set; }
 
         public UserModel()
         {

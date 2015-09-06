@@ -57,7 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseTest.cs" />
-    <Compile Include="Business\MainServiceTest.cs" />
+    <Compile Include="Business\FoodChoiceServiceTest.cs" />
     <Compile Include="Business\ValidationServiceTest.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -11,7 +11,7 @@ using Tatabouf.Domain;
 namespace Tatabouf.Tests.Business
 {
     [TestClass]
-    public class MainServiceTest : BaseTest
+    public class FoodChoiceServiceTest : BaseTest
     {
         [TestInitialize]
         public void Initialize()
@@ -25,12 +25,12 @@ namespace Tatabouf.Tests.Business
         }
 
         [TestMethod]
-        public void MainService_AddUser()
+        public void FoodChoiceService_AddUser()
         {
             // Arrange
             var repositoryMock = GetRepositoryMock();
 
-            var service = new MainService();
+            var service = new FoodChoiceService();
             service.FoodChoiceRepository = repositoryMock.Object;
 
             var user = new User
@@ -38,7 +38,7 @@ namespace Tatabouf.Tests.Business
                 Name = "lionel",
                 IpAddress = "192.168.0.1",
                 AvailableSeats = 2,
-                IGotMyLunch = true
+                IHaveMyLunch = true
             };
 
             // Act
@@ -49,12 +49,12 @@ namespace Tatabouf.Tests.Business
         }
 
         [TestMethod]
-        public void MainService_FindUserById()
+        public void FoodChoiceService_FindUserById()
         {
             const int userId = 1;
             var repositoryMock = GetRepositoryMock();
 
-            var service = new MainService();
+            var service = new FoodChoiceService();
             service.FoodChoiceRepository = repositoryMock.Object;
 
             var user = service.FindUserById(userId);
@@ -64,11 +64,11 @@ namespace Tatabouf.Tests.Business
         }
 
         [TestMethod]
-        public void MainService_GetPlaces()
+        public void FoodChoiceService_GetPlaces()
         {
             var repositoryMock = GetRepositoryMock();
 
-            var service = new MainService();
+            var service = new FoodChoiceService();
             service.FoodChoiceRepository = repositoryMock.Object;
 
             service.GetPlaces();
@@ -76,14 +76,14 @@ namespace Tatabouf.Tests.Business
         }
 
         [TestMethod]
-        public void MainService_GetTodayUsersChoices()
+        public void FoodChoiceService_GetTodayUsersChoices()
         {
             var today = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
             var tomorrow = today.AddDays(1);
 
             var repositoryMock = GetRepositoryMock();
 
-            var service = new MainService();
+            var service = new FoodChoiceService();
             service.FoodChoiceRepository = repositoryMock.Object;
             var usersChoices = service.GetTodayUsersChoices();
 
@@ -91,11 +91,11 @@ namespace Tatabouf.Tests.Business
         }
 
         [TestMethod]
-        public void MainService_FindPlacesByIds()
+        public void FoodChoiceService_FindPlacesByIds()
         {
             var repositoryMock = GetRepositoryMock();
 
-            var service = new MainService();
+            var service = new FoodChoiceService();
             service.FoodChoiceRepository = repositoryMock.Object;
 
             var selectedIdString = new string[] { "1", "2", "3", "4" };
@@ -106,14 +106,14 @@ namespace Tatabouf.Tests.Business
         }
 
         [TestMethod]
-        public void MainService_DeleteUser_Ok()
+        public void FoodChoiceService_DeleteUser_Ok()
         {
             const int userId = 1;
             const string ipAddressToCompare = "192.168.0.1";
 
             var repositoryMock = GetRepositoryMock();
 
-            var service = new MainService();
+            var service = new FoodChoiceService();
             service.FoodChoiceRepository = repositoryMock.Object;
 
             service.DeleteUser(userId, ipAddressToCompare);
@@ -123,14 +123,14 @@ namespace Tatabouf.Tests.Business
         }
 
         [TestMethod]
-        public void MainService_DeleteUser_IpAddressIncorrect()
+        public void FoodChoiceService_DeleteUser_IpAddressIncorrect()
         {
             const int userId = 1;
             const string ipAddressToCompare = "127.0.0.1";
 
             var repositoryMock = GetRepositoryMock();
 
-            var service = new MainService();
+            var service = new FoodChoiceService();
             service.FoodChoiceRepository = repositoryMock.Object;
 
             service.DeleteUser(userId, ipAddressToCompare);
@@ -140,14 +140,14 @@ namespace Tatabouf.Tests.Business
         }
 
         [TestMethod]
-        public void MainService_DeleteUser_BadUserId()
+        public void FoodChoiceService_DeleteUser_BadUserId()
         {
             const int userId = 99;
             const string ipAddressToCompare = "192.168.0.1";
 
             var repositoryMock = GetRepositoryMock();
 
-            var service = new MainService();
+            var service = new FoodChoiceService();
             service.FoodChoiceRepository = repositoryMock.Object;
 
             service.DeleteUser(userId, ipAddressToCompare);
@@ -157,7 +157,7 @@ namespace Tatabouf.Tests.Business
         }
 
         [TestMethod]
-        public void MainService_UpdateUser_Ok()
+        public void FoodChoiceService_UpdateUser_Ok()
         {
             const int userId = 1;
             var userUpdated = new User
@@ -174,7 +174,7 @@ namespace Tatabouf.Tests.Business
 
             var repositoryMock = GetRepositoryMock();
 
-            var service = new MainService();
+            var service = new FoodChoiceService();
             service.FoodChoiceRepository = repositoryMock.Object;
 
             service.UpdateUser(userUpdated, ipAddressToCompare);
@@ -184,7 +184,7 @@ namespace Tatabouf.Tests.Business
         }
 
         [TestMethod]
-        public void MainService_UpdateUser_IpAddressIncorrect()
+        public void FoodChoiceService_UpdateUser_IpAddressIncorrect()
         {
             const int userId = 1;
             var userUpdated = new User
@@ -201,7 +201,7 @@ namespace Tatabouf.Tests.Business
 
             var repositoryMock = GetRepositoryMock();
 
-            var service = new MainService();
+            var service = new FoodChoiceService();
             service.FoodChoiceRepository = repositoryMock.Object;
 
             service.UpdateUser(userUpdated, ipAddressToCompare);
@@ -211,7 +211,7 @@ namespace Tatabouf.Tests.Business
         }
 
         [TestMethod]
-        public void MainService_UpdateUser_BadUserId()
+        public void FoodChoiceService_UpdateUser_BadUserId()
         {
             const int userId = 99;
             var userUpdated = new User
@@ -228,7 +228,7 @@ namespace Tatabouf.Tests.Business
 
             var repositoryMock = GetRepositoryMock();
 
-            var service = new MainService();
+            var service = new FoodChoiceService();
             service.FoodChoiceRepository = repositoryMock.Object;
 
             service.UpdateUser(userUpdated, ipAddressToCompare);

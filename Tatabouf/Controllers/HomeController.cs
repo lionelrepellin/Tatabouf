@@ -12,8 +12,8 @@ namespace Tatabouf.Controllers
     {
         public ActionResult Index()
         {
-            var usersChoices = MainService.GetTodayUsersChoices();
-            var places = MainService.GetPlaces();
+            var usersChoices = FoodChoiceService.GetTodayUsersChoices();
+            var places = FoodChoiceService.GetPlaces();
             var model = new ContainerModel()
             {
                 FoodChoice = new UserModel(),
@@ -28,12 +28,12 @@ namespace Tatabouf.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Add(ContainerModel model, string[] selectedPlacesId)
         {
-            var usersChoices = MainService.GetTodayUsersChoices();
+            var usersChoices = FoodChoiceService.GetTodayUsersChoices();
 
             if (ModelState.IsValid)
             {
                 var user = Converter.UserModelToUser(model.FoodChoice);
-                user.SelectedPlaces = MainService.FindPlacesByIds(selectedPlacesId).ToList();
+                user.SelectedPlaces = FoodChoiceService.FindPlacesByIds(selectedPlacesId).ToList();
 
                 var errorMessage = string.Empty;
                 var allControlsAreOk = ValidationService.DoAllControls(user, usersChoices, out errorMessage);
@@ -41,7 +41,7 @@ namespace Tatabouf.Controllers
                 if (allControlsAreOk)
                 {
                     user.IpAddress = GetIP(Request);
-                    MainService.AddUser(user);
+                    FoodChoiceService.AddUser(user);
                     
                     logger.Debug("Ajout de l'utilisateur: {0} - IP: {1}", user.Name, user.IpAddress);                   
                     return RedirectToAction("Index");
@@ -51,7 +51,7 @@ namespace Tatabouf.Controllers
                     ModelState.AddModelError("Error", errorMessage);
                     model.UsersChoices = Converter.UsersToUserModels(usersChoices);
                     model.IpVisitor = GetIP(Request);
-                    model.AllPlaces = Converter.PlacesToPlaceModels(MainService.GetPlaces());
+                    model.AllPlaces = Converter.PlacesToPlaceModels(FoodChoiceService.GetPlaces());
                     
                     logger.Error("Erreur lors de l'ajout: {0} - IP: {1} - erreur: {2}", model.FoodChoice.Name, model.IpVisitor, errorMessage);
                     return View("Index", model);
@@ -59,7 +59,7 @@ namespace Tatabouf.Controllers
             }
             else
             {
-                var allPlaces = MainService.GetPlaces();
+                var allPlaces = FoodChoiceService.GetPlaces();
 
                 model.UsersChoices = Converter.UsersToUserModels(usersChoices);
                 model.AllPlaces = Converter.PlacesToPlaceModels(allPlaces);
@@ -71,10 +71,10 @@ namespace Tatabouf.Controllers
         
         public ActionResult Edit(int id)
         {
-            var user = MainService.FindUserById(id);
+            var user = FoodChoiceService.FindUserById(id);
             if (user != null)
             {
-                var allPlaces = MainService.GetPlaces();
+                var allPlaces = FoodChoiceService.GetPlaces();
                 var container = new ContainerModel
                 {
                     FoodChoice = Converter.UserToFoodChoiceModel(user),
@@ -94,12 +94,12 @@ namespace Tatabouf.Controllers
             {
                 var ip = GetIP(Request);
                 var user = Converter.UserModelToUser(model.FoodChoice);                
-                user.SelectedPlaces = MainService.FindPlacesByIds(selectedPlacesId).ToList();
+                user.SelectedPlaces = FoodChoiceService.FindPlacesByIds(selectedPlacesId).ToList();
 
                 var errorMessage = string.Empty;
                 if (ValidationService.ControlCheckBoxes(user, out errorMessage))
                 {
-                    MainService.UpdateUser(user, ip);
+                    FoodChoiceService.UpdateUser(user, ip);
                     logger.Debug("Modification de l'utilisateur: {0} - IP: {1}", user.Name, ip);
                 }
                 return RedirectToAction("Index");
@@ -119,7 +119,7 @@ namespace Tatabouf.Controllers
             {
                 var ip = GetIP(Request);
                 logger.Debug(string.Format("Suppression de l'utilisateur id: {0} par l'IP: {1}", id, ip));
-                MainService.DeleteUser(id, ip);
+                FoodChoiceService.DeleteUser(id, ip);
             }
         }
     }

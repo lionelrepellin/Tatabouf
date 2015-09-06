@@ -9,7 +9,7 @@ namespace Tatabouf.Controllers
     public abstract class BaseController : Controller
     {
         [Dependency]
-        public MainService MainService { get; set; }
+        public FoodChoiceService FoodChoiceService { get; set; }
         
         [Dependency]
         public ValidationService ValidationService { get; set; }

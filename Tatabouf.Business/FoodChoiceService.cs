@@ -8,7 +8,7 @@ using Tatabouf.Domain;
 
 namespace Tatabouf.Business
 {
-    public class MainService
+    public class FoodChoiceService
     {
         [Dependency]
         public IFoodChoiceRepository FoodChoiceRepository { get; set; }

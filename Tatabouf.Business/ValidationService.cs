@@ -30,17 +30,17 @@ namespace Tatabouf.Business
         {
             var choicesCount = user.SelectedPlaces.Count();
 
-            if (choicesCount == 0 && !user.IGotMyLunch)
+            if (choicesCount == 0 && !user.IHaveMyLunch)
             {
                 errorMessage = "Merci de cocher au moins une case !";
                 return false;
             }
-            else if (user.IGotMyLunch && choicesCount > 0)
+            else if (user.IHaveMyLunch && choicesCount > 0)
             {
                 errorMessage = "Si tatabouf, pourquoi aller chercher bonheur ailleurs ?";
                 return false;
             }
-            else if (user.IGotMyLunch && user.AvailableSeats.HasValue && user.AvailableSeats.Value > 0)
+            else if (user.IHaveMyLunch && user.AvailableSeats.HasValue && user.AvailableSeats.Value > 0)
             {
                 errorMessage = "Tatabouf ou tapatabouf ?";
                 return false;

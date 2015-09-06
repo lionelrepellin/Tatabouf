@@ -27,9 +27,9 @@ namespace Tatabouf.Tests.Controllers
             controller = new HomeController();
             controller.ValidationService = new ValidationService();
 
-            var mainService = new MainService();
-            mainService.FoodChoiceRepository = GetRepositoryMock().Object;
-            controller.MainService = mainService;
+            var foodChoiceService = new FoodChoiceService();
+            foodChoiceService.FoodChoiceRepository = GetRepositoryMock().Object;
+            controller.FoodChoiceService = foodChoiceService;
         }
 
         [TestMethod]
@@ -74,7 +74,7 @@ namespace Tatabouf.Tests.Controllers
                 FoodChoice = new UserModel
                 {
                     Name = "Gérard",
-                    IGotIt = true
+                    IBroughtMyLunch = true
                 }
             };
 
@@ -90,7 +90,7 @@ namespace Tatabouf.Tests.Controllers
                 FoodChoice = new UserModel
                 {
                     Name = "Gérard",
-                    IGotIt = true,
+                    IBroughtMyLunch = true,
                     NumberOfAvailableSeats = 4
                 }
             };
@@ -100,14 +100,14 @@ namespace Tatabouf.Tests.Controllers
         }
         
         [TestMethod]
-        public void Controller_AddIGotIt()
+        public void Controller_AddIMyLunch()
         {
             var model = new ContainerModel
             {
                 FoodChoice = new UserModel
                 {
                     Name = "Raoul",
-                    IGotIt = true
+                    IBroughtMyLunch = true
                 }
             };
 

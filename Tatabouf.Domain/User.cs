@@ -12,9 +12,9 @@ namespace Tatabouf.Domain
         public string Name { get; set; }
 
         /// <summary>
-        /// I got my lunch !
+        /// I have my lunch !
         /// </summary>
-        public bool IGotMyLunch { get; set; }
+        public bool IHaveMyLunch { get; set; }
 
         /// <summary>
         /// number of available seats in my car
@@ -25,12 +25,15 @@ namespace Tatabouf.Domain
 
         public string IpAddress { get; set; }
 
+        /// <summary>
+        /// user choices list
+        /// </summary>
+        public virtual ICollection<Place> SelectedPlaces { get; set; }
+
         public User()
         {
             InscriptionDate = DateTime.Now;
             SelectedPlaces = new HashSet<Place>();
         }
-
-        public virtual ICollection<Place> SelectedPlaces { get; set; }        
     }
 }

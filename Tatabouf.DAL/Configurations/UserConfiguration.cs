@@ -17,7 +17,7 @@ namespace Tatabouf.DAL.Configurations
 
             Property(t => t.Id).HasColumnName("id").HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(t => t.Name).HasColumnName("name");
-            Property(t => t.IGotMyLunch).HasColumnName("i_got_my_lunch");
+            Property(t => t.IHaveMyLunch).HasColumnName("i_have_my_lunch");
             Property(t => t.AvailableSeats).HasColumnName("available_seats");
             Property(t => t.InscriptionDate).HasColumnName("inscription_date");
             Property(t => t.IpAddress).HasColumnName("ip_address");

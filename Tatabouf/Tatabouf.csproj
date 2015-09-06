@@ -202,6 +202,9 @@
     <Content Include="Content\logo.png" />
     <Content Include="Content\save.png" />
     <Content Include="Content\stylesheet.css" />
+    <Content Include="Content\stylesheet.min.css">
+      <DependentUpon>stylesheet.css</DependentUpon>
+    </Content>
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -263,6 +266,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\prepros.cfg" />
+    <Content Include="Content\stylesheet.css.map">
+      <DependentUpon>stylesheet.css</DependentUpon>
+    </Content>
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>

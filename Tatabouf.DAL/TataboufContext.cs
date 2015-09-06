@@ -4,17 +4,17 @@ using Tatabouf.Domain;
 
 namespace Tatabouf.DAL
 {
-    public class MainContext : DbContext
+    public class TataboufContext : DbContext
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Place> Places { get; set; }
                 
-        static MainContext()
+        static TataboufContext()
         {
-            Database.SetInitializer<MainContext>(null);
+            Database.SetInitializer<TataboufContext>(null);
         }
 
-        public MainContext()
+        public TataboufContext()
             : base("TataboufContext")
         {
             this.Configuration.LazyLoadingEnabled = false;

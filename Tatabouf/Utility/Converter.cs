@@ -13,9 +13,9 @@ namespace Tatabouf.Utility
             {
                 Id = userChoice.Id,
                 Name = userChoice.Name,
-                IGotIt = userChoice.IGotMyLunch,
+                IBroughtMyLunch = userChoice.IHaveMyLunch,
                 NumberOfAvailableSeats = userChoice.AvailableSeats,
-                Ip = userChoice.IpAddress,
+                IP = userChoice.IpAddress,
                 Choices = PlacesToPlaceModels(userChoice.SelectedPlaces)
             };
         }
@@ -26,9 +26,9 @@ namespace Tatabouf.Utility
             {
                 Id = model.Id,
                 Name = model.Name,
-                IGotMyLunch = model.IGotIt,
+                IHaveMyLunch = model.IBroughtMyLunch,
                 AvailableSeats = model.NumberOfAvailableSeats,
-                IpAddress = model.Ip,
+                IpAddress = model.IP,
                 SelectedPlaces = PlaceModelsToPlaces(model.Choices)
             };
         }

@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Ubuntu:400,300,500,700);
+﻿@import url(http://fonts.googleapis.com/css?family=Ubuntu:400,300,500,700);
 html,
 body,
 div,
@@ -166,7 +166,7 @@ body {
   width: 1200px;
 }
 .main .inner header {
-  background: url("logo.png") center center no-repeat;
+  background: url("/Content/logo.png") center center no-repeat;
   border-bottom: 1px solid #C9D5E5;
   height: 100px;
   line-height: 100px;
@@ -232,7 +232,7 @@ body {
   background-color: #9BD999;
   color: #9BD999;
 }
-.main .inner section .tatabouf tbody tr td.i-got-it {
+.main .inner section .tatabouf tbody tr td.i-have-it {
   background-color: #F05D4E;
   color: #F05D4E;
 }
@@ -413,3 +413,4 @@ body {
 .main .inner section .validation-summary-errors ul li {
   line-height: 2em;
 }
+/*# sourceMappingURL=stylesheet.css.map */
