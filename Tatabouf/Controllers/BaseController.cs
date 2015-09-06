@@ -1,18 +1,18 @@
 ﻿using Microsoft.Practices.Unity;
 using NLog;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Tatabouf.DAL;
+using Tatabouf.Business;
 
 namespace Tatabouf.Controllers
 {
     public abstract class BaseController : Controller
     {
         [Dependency]
-        public ITataboufRepository Repository { get; set; }
+        public MainService MainService { get; set; }
+        
+        [Dependency]
+        public ValidationService ValidationService { get; set; }
 
         protected static Logger logger = LogManager.GetCurrentClassLogger();
 

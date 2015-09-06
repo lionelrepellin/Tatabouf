@@ -5,11 +5,11 @@
     loadDetails(id);
 };
 
-function loadDetails(idCrew) {
+function loadDetails(foodChoiceId) {
     $.ajax({
         type: "GET",
         url: "/Home/Edit",
-        data: { id: idCrew },
+        data: { id: foodChoiceId },
         success: showPopup,
         error: ShowError,
         dataType: "html"
@@ -32,11 +32,11 @@ function onRemoveClick(e) {
     removeItem(id);
 };
 
-function removeItem(idCrew) {
+function removeItem(foodChoiceId) {
     $.ajax({
         type: "POST",
         url: "/Home/Remove",
-        data: { id: idCrew },
+        data: { id: foodChoiceId },
         success: function () {
             document.location = "/Home";
         },
@@ -59,3 +59,13 @@ function showPopup(result) {
 function ShowError(xhr, ajaxOptions, thrownError) {
     alert(xhr.status + ' - ' + thrownError);
 };
+
+$(function() {
+    $('.actions .edit').on('click', onEditClick);
+    $('.actions .remove').on('click', showDeletePopup);
+    $('#btn-confirm-yes').on('click', onRemoveClick);
+    $('#btn-confirm-no').on('click', onCancelClick);
+    $('.formulaire .actions .save').on('click', function () {
+        $("form").submit();
+    });
+});

@@ -112,6 +112,7 @@ body{
             margin: 40px 0;
             .tatabouf{
                 margin: 0 auto;
+                table-layout: fixed;
                 width: 1120px;
                 thead{
                     background-color: #A6B2C2;
@@ -159,6 +160,10 @@ body{
                                 background-color: #9BD999;
                                 color: #9BD999;
                             }
+                            &.i-got-it{
+                                background-color: #F05D4E;
+                                color: #F05D4E;
+                            }
                             &.number-of-seats{
                                 span{
                                     background-color: #F0F2F4;
@@ -176,11 +181,12 @@ body{
                             }
                             &.actions{
                                 color: #2B3D51;
+                                cursor: pointer;
                                 font-weight: bold;
                                 font-size: 14px;
                                 text-transform: uppercase;
                                 text-align: center;
-                                width: 200px;
+                                width: 120px;
                                 .icon{
                                     cursor: pointer;
                                     margin-right: 30px;
@@ -212,6 +218,7 @@ body{
                                 font-size: 18px;
                                 font-weight: bold;
                                 text-transform: uppercase;
+                                width: 160px;
                                 input{
                                     background-color: #F0F2F4;
                                     border: 0;
@@ -241,10 +248,11 @@ body{
                             }
                             &.actions{
                                 color: #2B3D51;
+                                cursor: pointer;
                                 font-weight: bold;
                                 font-size: 14px;
                                 text-transform: uppercase;
-                                width: 200px;
+                                width: 120px;
                                 input{
                                     background: none;
                                     border: 0;
@@ -290,8 +298,9 @@ body{
                         padding: 20px;
                     }
                     .actions{
-                        text-align: center;
+                        cursor: pointer;
                         margin-bottom: 20px;
+                        text-align: center;
                         button{
                             border: 1px solid #2b3d51;
                             background: none;

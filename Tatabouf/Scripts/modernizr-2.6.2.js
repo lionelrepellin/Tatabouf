@@ -1124,7 +1124,7 @@ window.Modernizr = (function( window, document, undefined ) {
 
       /**
        * returns a shived element for the given nodeName and document
-       * @memberOf html5
+       * @userOf html5
        * @param {String} nodeName name of the element
        * @param {Document} ownerDocument The context document.
        * @returns {Object} The shived element.
@@ -1161,7 +1161,7 @@ window.Modernizr = (function( window, document, undefined ) {
 
       /**
        * returns a shived DocumentFragment for the given document
-       * @memberOf html5
+       * @userOf html5
        * @param {Document} ownerDocument The context document.
        * @returns {Object} The shived DocumentFragment.
        */
@@ -1223,7 +1223,7 @@ window.Modernizr = (function( window, document, undefined ) {
 
       /**
        * Shivs the given document.
-       * @memberOf html5
+       * @userOf html5
        * @param {Document} ownerDocument The document to shiv.
        * @returns {Document} The shived document.
        */
@@ -1262,21 +1262,21 @@ window.Modernizr = (function( window, document, undefined ) {
 
         /**
          * An array or space separated string of node names of the elements to shiv.
-         * @memberOf html5
+         * @userOf html5
          * @type Array|String
          */
         'elements': options.elements || 'abbr article aside audio bdi canvas data datalist details figcaption figure footer header hgroup mark meter nav output progress section summary time video',
 
         /**
          * A flag to indicate that the HTML5 style sheet should be inserted.
-         * @memberOf html5
+         * @userOf html5
          * @type Boolean
          */
         'shivCSS': (options.shivCSS !== false),
 
         /**
          * Is equal to true if a browser supports creating unknown/HTML5 elements
-         * @memberOf html5
+         * @userOf html5
          * @type boolean
          */
         'supportsUnknownElements': supportsUnknownElements,
@@ -1284,14 +1284,14 @@ window.Modernizr = (function( window, document, undefined ) {
         /**
          * A flag to indicate that the document's `createElement` and `createDocumentFragment`
          * methods should be overwritten.
-         * @memberOf html5
+         * @userOf html5
          * @type Boolean
          */
         'shivMethods': (options.shivMethods !== false),
 
         /**
          * A string to describe the type of `html5` object ("default" or "default print").
-         * @memberOf html5
+         * @userOf html5
          * @type String
          */
         'type': 'default',

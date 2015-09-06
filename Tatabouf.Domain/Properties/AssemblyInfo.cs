@@ -1,16 +1,15 @@
 ﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Resources;
 
 // Les informations générales relatives à un assembly dépendent de 
 // l'ensemble d'attributs suivant. Changez les valeurs de ces attributs pour modifier les informations
 // associées à un assembly.
-[assembly: AssemblyTitle("Tatabouf.Tests")]
-[assembly: AssemblyDescription("Tests unitaires sur les règles métiers et le contrôleur")]
+[assembly: AssemblyTitle("Tatabouf.Domain")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Tatabouf.Tests")]
+[assembly: AssemblyProduct("Tatabouf.Domain")]
 [assembly: AssemblyCopyright("Copyright © Lionel Repellin / Jimmy Burbure")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -21,7 +20,7 @@ using System.Resources;
 [assembly: ComVisible(false)]
 
 // Le GUID suivant est pour l'ID de la typelib si ce projet est exposé à COM
-[assembly: Guid("a28e68e6-ddcf-4e98-9aeb-a3e527cf8032")]
+[assembly: Guid("9adb0deb-e8bd-49a3-ab91-5bda72ea1492")]
 
 // Les informations de version pour un assembly se composent des quatre valeurs suivantes :
 //
@@ -35,4 +34,3 @@ using System.Resources;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
-[assembly: NeutralResourcesLanguageAttribute("fr")]

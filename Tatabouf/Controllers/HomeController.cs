@@ -1,107 +1,113 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using Tatabouf.Domain;
 using Tatabouf.Models;
-using Tatabouf.Util;
+using Tatabouf.Utility;
 
 namespace Tatabouf.Controllers
 {
     public class HomeController : BaseController
     {
-
         public ActionResult Index()
         {
-            var dates = Repository.GetAllDates();
+            var usersChoices = MainService.GetTodayUsersChoices();
+            var places = MainService.GetPlaces();
             var model = new ContainerModel()
             {
-                Crew = new CrewModel(),
-                Dates = Converter.GetCrewModels(dates),
+                FoodChoice = new UserModel(),
+                UsersChoices = Converter.UsersToUserModels(usersChoices),
+                AllPlaces = Converter.PlacesToPlaceModels(places),
                 IpVisitor = GetIP(Request)
             };
             return View(model);
         }
 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add(ContainerModel model)
+        public ActionResult Add(ContainerModel model, string[] selectedPlacesId)
         {
+            var usersChoices = MainService.GetTodayUsersChoices();
+
             if (ModelState.IsValid)
             {
-                var crew = Converter.GetCrew(model.Crew);
-                var dates = Repository.GetAllDates();
-                var errorMessage = crew.CheckAllBoxes();
+                var user = Converter.UserModelToUser(model.FoodChoice);
+                user.SelectedPlaces = MainService.FindPlacesByIds(selectedPlacesId).ToList();
 
-                if (IsNameExists(crew.Name, dates))
+                var errorMessage = string.Empty;
+                var allControlsAreOk = ValidationService.DoAllControls(user, usersChoices, out errorMessage);
+
+                if (allControlsAreOk)
                 {
-                    ModelState.AddModelError("Name", "Le nom existe déjà !");                    
-                    model.Dates = Converter.GetCrewModels(dates);
-                    model.IpVisitor = GetIP(Request);
-                    return View("Index", model);
-                }
-                else if (!string.IsNullOrEmpty(errorMessage))
-                {
-                    ModelState.AddModelError("Checkbox", errorMessage);
-                    model.Dates = Converter.GetCrewModels(dates);
-                    model.IpVisitor = GetIP(Request);
-                    return View("Index", model);
+                    user.IpAddress = GetIP(Request);
+                    MainService.AddUser(user);
+                    
+                    logger.Debug("Ajout de l'utilisateur: {0} - IP: {1}", user.Name, user.IpAddress);                   
+                    return RedirectToAction("Index");
                 }
                 else
                 {
-                    crew.IpAddress = GetIP(Request);
-                    Repository.AddCrew(crew);
-
-                    logger.Debug(string.Format("Ajout de l'utilisateur: {0} par l'IP: {1}", crew.Name, crew.IpAddress));
-                    return RedirectToAction("Index");
+                    ModelState.AddModelError("Error", errorMessage);
+                    model.UsersChoices = Converter.UsersToUserModels(usersChoices);
+                    model.IpVisitor = GetIP(Request);
+                    model.AllPlaces = Converter.PlacesToPlaceModels(MainService.GetPlaces());
+                    
+                    logger.Error("Erreur lors de l'ajout: {0} - IP: {1} - erreur: {2}", model.FoodChoice.Name, model.IpVisitor, errorMessage);
+                    return View("Index", model);
                 }
             }
             else
             {
-                var dates = Repository.GetAllDates();
-                model.Dates = Converter.GetCrewModels(dates);
+                var allPlaces = MainService.GetPlaces();
+
+                model.UsersChoices = Converter.UsersToUserModels(usersChoices);
+                model.AllPlaces = Converter.PlacesToPlaceModels(allPlaces);
+
+                logger.Error("Erreur lors de l'ajout: {0} - IP: {1}", model.FoodChoice.Name, model.IpVisitor);
                 return View("Index", model);
             }
         }
-
-
+        
         public ActionResult Edit(int id)
         {
-            var crew = Repository.FindCrewById(id);
-            if (crew != null)
+            var user = MainService.FindUserById(id);
+            if (user != null)
             {
+                var allPlaces = MainService.GetPlaces();
                 var container = new ContainerModel
                 {
-                    Crew = Converter.GetCrewModel(crew),
-                    IpVisitor = GetIP(Request)
+                    FoodChoice = Converter.UserToFoodChoiceModel(user),
+                    IpVisitor = GetIP(Request),
+                    AllPlaces = Converter.PlacesToPlaceModels(allPlaces)
                 };
-                return View("Form", "Popup", container);
+                return View("_Form", "Popup", container);
             }
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Update(ContainerModel model)
+        public ActionResult Update(ContainerModel model, string[] selectedPlacesId)
         {
             if (ModelState.IsValid)
             {
                 var ip = GetIP(Request);
-                var crew = Converter.GetCrew(model.Crew);
+                var user = Converter.UserModelToUser(model.FoodChoice);                
+                user.SelectedPlaces = MainService.FindPlacesByIds(selectedPlacesId).ToList();
 
-                if (string.IsNullOrEmpty(crew.CheckAllBoxes()))
+                var errorMessage = string.Empty;
+                if (ValidationService.ControlCheckBoxes(user, out errorMessage))
                 {
-                    Repository.UpdateCrew(crew, ip);
-                    logger.Debug(string.Format("Modification de l'utilisateur: {0} par l'IP: {1}", crew.Name, ip));
+                    MainService.UpdateUser(user, ip);
+                    logger.Debug("Modification de l'utilisateur: {0} - IP: {1}", user.Name, ip);
                 }
                 return RedirectToAction("Index");
             }
             else
             {
                 // errors are not managed
+                logger.Error("Erreur lors de la modification: {0}", model.FoodChoice.Name);
                 return RedirectToAction("Index");
             }
         }
@@ -113,23 +119,8 @@ namespace Tatabouf.Controllers
             {
                 var ip = GetIP(Request);
                 logger.Debug(string.Format("Suppression de l'utilisateur id: {0} par l'IP: {1}", id, ip));
-                Repository.DeleteCrew(id, ip);
+                MainService.DeleteUser(id, ip);
             }
-        }
-
-
-        // Check if name already exists in registered dates for the current day
-        private bool IsNameExists(string name, IEnumerable<Crew> dates)
-        {
-            if (!dates.Any()) { return false; }
-
-            if (!string.IsNullOrEmpty(name) && dates != null && dates.Any())
-            {
-                name = name.ToLower().Trim();
-                var names = dates.Select(d => d.Name.ToLower().Trim()).ToList();
-                return names.Contains(name);
-            }
-            return true;
         }
     }
 }

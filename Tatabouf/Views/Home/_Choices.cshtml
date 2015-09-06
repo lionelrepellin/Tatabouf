@@ -1,0 +1,95 @@
+﻿@using System.Collections.Generic
+@using System.Linq
+@using Tatabouf.Domain
+@using Tatabouf.Models
+@model Tatabouf.Models.ContainerModel
+
+@{
+    var numberOfColumns = Model.AllPlaces.Count() + 4;
+}
+
+@functions{
+    string GetClassIGotIt(bool checkBox)
+    {
+        if (checkBox)
+        {
+            return "i-got-it";
+        }
+        else
+        {
+            return "dont-want-to-go";
+        }
+    }
+
+    string GetSymbol(bool checkBox)
+    {
+        if (checkBox)
+        {
+            return "=)";
+        }
+        else
+        {
+            return "=(";
+        }
+    }
+    
+    bool IsPlaceSelected(IEnumerable<PlaceModel> places, int placeModelId)
+    {
+        var ids = places.Select(p => p.Id);
+        return ids.Contains(placeModelId);
+    }
+}
+
+<table class="tatabouf">
+    <thead>
+        <tr>
+            <td class="empty">&nbsp;</td>
+            <td class="name">J'ai ma<br />bouffe</td>
+            @foreach (var choice in Model.AllPlaces)
+            {
+                <td class="name">@choice.Label</td>
+            }
+            <td class="name">Places <br />voiture</td>
+            <td width="120">&nbsp;</td>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.UsersChoices.Any())
+        {
+            foreach (var user in Model.UsersChoices)
+            {
+                <tr>
+                    <td class="label">@user.Name</td>
+                    <td class="@GetClassIGotIt(user.IGotIt)">@GetSymbol(user.IGotIt)</td>
+                    @foreach (var place in Model.AllPlaces)
+                    {
+                        if (IsPlaceSelected(user.Choices, place.Id))
+                        {
+                            <td class="want-to-go">=)</td>
+                        }
+                        else
+                        {
+                            <td class="dont-want-to-go">=(</td>
+                        }
+                    }                    
+                    <td class="number-of-seats"><span>@user.NumberOfAvailableSeats</span></td>
+                    <td class="actions">
+                        @if (user.Ip == Model.IpVisitor)
+                        {
+                            <img src="~/Content/edit.png" alt="Éditer" class="icon edit" data-id="@user.Id" />
+                            <img src="~/Content/delete.png" alt="Supprimer" class="icon remove" data-id="@user.Id" />
+                        }
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="@numberOfColumns" class="inscris-toi">
+                    Inscris-toi !
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -7,22 +7,22 @@ using System.Web;
 namespace Tatabouf.Attributes
 {
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = true, Inherited = false)]
-    public class CheckCountOfSeatsAttribute : ValidationAttribute
+    public class CheckNumberOfSeatsAttribute : ValidationAttribute
     {
         private int _maxSeats;
 
-        public CheckCountOfSeatsAttribute(string errorMessage, int maxSeatsAvaible)
+        public CheckNumberOfSeatsAttribute(string errorMessage, int maxAvailableSeats)
             : base(errorMessage)
         {
-            _maxSeats = maxSeatsAvaible;
+            _maxSeats = maxAvailableSeats;
         }
 
         public override bool IsValid(object value)
         {
             if (value != null)
             {
-                var nbPlaces = (byte)value;
-                if (nbPlaces > _maxSeats)
+                var numberOfSeats = (byte)value;
+                if (numberOfSeats > _maxSeats)
                 {
                     return false;
                 }

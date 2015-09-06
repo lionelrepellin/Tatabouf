@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.ComponentModel;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Tatabouf.Attributes;
 
@@ -17,7 +13,7 @@ namespace Tatabouf.Models
         Update
     };
 
-    public class CrewModel
+    public class UserModel
     {
         public int Id { get; set; }
 
@@ -33,21 +29,18 @@ namespace Tatabouf.Models
         [StringLength(15, ErrorMessage = "C'est trop long ! 15 caractères maximum")]
         public string Name { get; set; }
 
-        public bool MarieBlachere { get; set; }
-
-        public bool Carrefour { get; set; }
-
-        public bool Kebab { get; set; }
-
-        public bool Quick { get; set; }
-
-        public bool Other { get; set; }
+        public IEnumerable<PlaceModel> Choices { get; set; }
 
         public bool IGotIt { get; set; }
         
-        [CheckCountOfSeats("4 places maxi autorisées: t'as pas un bus !", 4)]
-        public byte? NumberOfSeatsAvailable { get; set; }
+        [CheckNumberOfSeats("4 places maxi autorisées: t'as pas un bus !", 4)]
+        public byte? NumberOfAvailableSeats { get; set; }
 
-        public string IpAddress { get; set; }
+        public string Ip { get; set; }
+
+        public UserModel()
+        {
+            Choices = new HashSet<PlaceModel>();
+        }
     }
 }

@@ -3,7 +3,7 @@ Tatabouf
 
 ### What is it?
 
-Just a simple (quick and dirty) web app to improve a team organization at lunchtime.
+Just a simple web app to improve a team organization at lunchtime.
 
 ### Creators
 

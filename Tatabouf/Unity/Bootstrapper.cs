@@ -1,7 +1,8 @@
-using System.Web.Mvc;
 using Microsoft.Practices.Unity;
-using Unity.Mvc4;
+using System.Web.Mvc;
+using Tatabouf.Business;
 using Tatabouf.DAL;
+using Unity.Mvc4;
 
 namespace Tatabouf.Unity
 {
@@ -22,9 +23,11 @@ namespace Tatabouf.Unity
 
             // register all your components with the container here
             // it is NOT necessary to register your controllers
-            container.RegisterType<ITataboufRepository, TataboufRepository>();
-            container.RegisterType<TataboufContext>();
-            
+            container.RegisterType<IFoodChoiceRepository, FoodChoiceRepository>();
+            container.RegisterType<MainContext>();
+            container.RegisterType<ValidationService>();
+            container.RegisterType<MainService>();
+
             return container;
         }
     }

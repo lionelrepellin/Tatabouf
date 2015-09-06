@@ -10,138 +10,145 @@ using Tatabouf.DAL;
 using System.Web.Mvc;
 using Tatabouf.Domain;
 using Tatabouf.Models;
-using Tatabouf.Util;
+using Tatabouf.Utility;
+using Tatabouf.Business;
 
-namespace Tatabouf.Tests
+namespace Tatabouf.Tests.Controllers
 {
     [TestClass]
-    public class HomeControllerTest
+    public class HomeControllerTest : BaseTest
     {
         private HomeController controller;
 
         [TestInitialize]
         public void Initialize()
         {
+            // initialize controller with services and fake repository
             controller = new HomeController();
-            controller.Repository = GetRepositoryMock();
+            controller.ValidationService = new ValidationService();
+
+            var mainService = new MainService();
+            mainService.FoodChoiceRepository = GetRepositoryMock().Object;
+            controller.MainService = mainService;
         }
 
         [TestMethod]
         public void Controller_AddWithSameName()
         {
+            var selectedPlacesId = new string[] { "1", "2" };
+
             var model = new ContainerModel
             {
-                Crew = new CrewModel
+                FoodChoice = new UserModel
                 {
-                    Carrefour = true,
-                    Name = "BOB"
+                    Name = "Michel"
                 }
             };
 
-            var viewResult = (ViewResult)controller.Add(model);
+            var viewResult = (ViewResult)controller.Add(model, selectedPlacesId);
             Assert.AreEqual("Le nom existe déjà !", GetErrorMessage(viewResult));
         }
-
+        
         [TestMethod]
         public void Controller_AddWithNameButNoChoice()
         {
             var model = new ContainerModel
             {
-                Crew = new CrewModel
+                FoodChoice = new UserModel
                 {
-                    Name = "Gérard"
+                    Name = "Bob"
                 }
             };
 
-            var viewResult = (ViewResult)controller.Add(model);
+            var viewResult = (ViewResult)controller.Add(model, null);
             Assert.AreEqual("Merci de cocher au moins une case !", GetErrorMessage(viewResult));
         }
-
-
+        
         [TestMethod]
         public void Controller_AddWithNameButToMuchChoices()
         {
+            var selectedPlacesId = new string[] { "1", "2" };
+
             var model = new ContainerModel
             {
-                Crew = new CrewModel
+                FoodChoice = new UserModel
                 {
                     Name = "Gérard",
-                    Carrefour = true,
                     IGotIt = true
                 }
             };
 
-            var viewResult = (ViewResult)controller.Add(model);
+            var viewResult = (ViewResult)controller.Add(model, selectedPlacesId);
             Assert.AreEqual("Si tatabouf, pourquoi aller chercher bonheur ailleurs ?", GetErrorMessage(viewResult));
         }
-
+        
         [TestMethod]
         public void Controller_AddWithNameButToMuchChoicesAndSeats()
         {
             var model = new ContainerModel
             {
-                Crew = new CrewModel
+                FoodChoice = new UserModel
                 {
                     Name = "Gérard",
                     IGotIt = true,
-                    NumberOfSeatsAvailable = 4
+                    NumberOfAvailableSeats = 4
                 }
             };
 
-            var viewResult = (ViewResult)controller.Add(model);
+            var viewResult = (ViewResult)controller.Add(model, null);
             Assert.AreEqual("Tatabouf ou tapatabouf ?", GetErrorMessage(viewResult));
         }
-
+        
         [TestMethod]
         public void Controller_AddIGotIt()
         {
             var model = new ContainerModel
             {
-                Crew = new CrewModel
+                FoodChoice = new UserModel
                 {
-                    Name = "Gérard",
+                    Name = "Raoul",
                     IGotIt = true
                 }
             };
 
-            var routeResult = (RedirectToRouteResult)controller.Add(model);
+            var routeResult = (RedirectToRouteResult)controller.Add(model, null);
             var method = routeResult.RouteValues.First().Value.ToString();
             Assert.AreEqual("Index", method);
         }
-
+        
         [TestMethod]
         public void Controller_AddOneOrMoreChoices()
         {
+            var selectedPlacesId = new string[] { "1", "2" };
+
             var model = new ContainerModel
             {
-                Crew = new CrewModel
+                FoodChoice = new UserModel
                 {
-                    Name = "Gérard",
-                    Carrefour = true,
-                    MarieBlachere = true
+                    Name = "Simon"                    
                 }
             };
 
-            var routeResult = (RedirectToRouteResult)controller.Add(model);
+            var routeResult = (RedirectToRouteResult)controller.Add(model, selectedPlacesId);
             var method = routeResult.RouteValues.First().Value.ToString();
             Assert.AreEqual("Index", method);
         }
-
+        
         [TestMethod]
         public void Controller_AddOneOrMoreChoicesAndSeats()
         {
+            var selectedPlacesId = new string[] { "1", "2" };
+
             var model = new ContainerModel
             {
-                Crew = new CrewModel
+                FoodChoice = new UserModel
                 {
-                    Name = "Gérard",
-                    Carrefour = true,
-                    MarieBlachere = true,
-                    NumberOfSeatsAvailable = 3
+                    Name = "Charles",
+                    NumberOfAvailableSeats = 3
                 }
             };
 
-            var routeResult = (RedirectToRouteResult)controller.Add(model);
+            var routeResult = (RedirectToRouteResult)controller.Add(model, selectedPlacesId);
             var method = routeResult.RouteValues.First().Value.ToString();
             Assert.AreEqual("Index", method);
         }
@@ -151,38 +158,6 @@ namespace Tatabouf.Tests
             var errorMessage = viewResult.ViewData.ModelState.Values.First().Errors.First().ErrorMessage;
             return errorMessage;
         }
-
-        private ITataboufRepository GetRepositoryMock()
-        {
-            var repositoryMock = new Mock<ITataboufRepository>();
-            repositoryMock.Setup(r => r.AddCrew(It.IsAny<Crew>()));
-            repositoryMock.Setup(r => r.UpdateCrew(It.IsAny<Crew>(), It.IsAny<string>()));
-            repositoryMock.Setup(r => r.DeleteCrew(It.IsAny<int>(), It.IsAny<string>()));
-            repositoryMock.Setup(r => r.GetAllDates()).Returns(GetFakeDates());
-            repositoryMock.Setup(r => r.FindCrewById(It.IsAny<int>())).Returns(GetFakeCrew());
-            return repositoryMock.Object;
-        }
-
-        private IEnumerable<Crew> GetFakeDates()
-        {
-            var dates = new List<Crew>();
-            dates.Add(new Crew { Id = 1, Name = "Raoul", Carrefour = true, MarieBlachere = true });
-            dates.Add(new Crew { Id = 2, Name = "Marcel", Quick = true, NumberOfSeatsAvailable = 3 });
-            dates.Add(new Crew { Id = 3, Name = "René", Kebab = true, MarieBlachere = true });
-            dates.Add(new Crew { Id = 4, Name = "Bob", Carrefour = true, Other = true });
-            dates.Add(new Crew { Id = 5, Name = "Michel", IGotIt = true });
-
-            return dates;
-        }
-
-        private Crew GetFakeCrew()
-        {
-            return new Crew
-            {
-                Id = 1,
-                MarieBlachere = true,
-                NumberOfSeatsAvailable = 3
-            };
-        }
     }
+
 }

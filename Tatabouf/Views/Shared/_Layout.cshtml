@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>Tatabouf ?</title>
-    <link rel="stylesheet" href="~/Content/stylesheet.css">    
+    @Styles.Render("~/Content/css")
     <link rel="icon" href="~/Content/favicon.ico" type="image/x-icon" />
 </head>
 <body>
@@ -14,26 +14,14 @@
                 <h1>Tatabouf ?</h1>
             </header>
             <section>
-                @RenderBody()
-
-                @Scripts.Render("~/bundles/jquery")
-                @Scripts.Render("~/bundles/jqueryval")
-                @RenderSection("scripts", required: false)
+                @RenderBody()                
             </section>
         </div>
         <!-- /.inner -->
     </div>
     <!-- /.main -->
-    <script type="text/javascript">
-    $(function() {
-        $('.actions .edit').on('click', onEditClick);
-        $('.actions .remove').on('click', showDeletePopup);
-        $('#btn-confirm-yes').on('click', onRemoveClick);
-        $('#btn-confirm-no').on('click', onCancelClick);
-        $('.formulaire .actions .save').on('click', function () {
-            $("form").submit();
-        });
-    });
-   </script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @RenderSection("scripts", required: false)
 </body>
 </html>
