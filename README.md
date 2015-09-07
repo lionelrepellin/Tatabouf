@@ -1,7 +1,7 @@
 Tatabouf
 ===
 
-### What is it?
+### What is it ?
 
 Just a simple web app to improve a team organization at lunchtime.
 
