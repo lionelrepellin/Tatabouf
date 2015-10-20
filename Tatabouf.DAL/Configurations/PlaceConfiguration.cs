@@ -20,7 +20,6 @@ namespace Tatabouf.DAL.Configurations
             Property(t => t.InputType).HasColumnName("input_type");
             Property(t => t.Css).HasColumnName("css_class");
 
-            //HasMany(t => t.ShippingShippers).WithRequired(t => t.Shipping);
             HasMany(t => t.Choices).WithRequired(t => t.Place);
 
             HasKey(t => t.Id);

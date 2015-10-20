@@ -52,8 +52,8 @@ namespace Tatabouf.Controllers
             if (ModelState.IsValid)
             {
                 var user = Converter.UserModelToUser(model);
-                
-                // vérif choix cohérents
+
+                // check choices consistency
                 var places = FoodChoiceService.GetPlaces();
                 ValidationService.RemoveInvalidEntry(user, places);
 
@@ -119,8 +119,8 @@ namespace Tatabouf.Controllers
             if (ModelState.IsValid)
             {                
                 var user = Converter.UserModelToUser(model);
-                
-                // vérif choix cohérents
+
+                // check choices consistency
                 var places = FoodChoiceService.GetPlaces();
                 ValidationService.RemoveInvalidEntry(user, places);
 

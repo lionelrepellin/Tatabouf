@@ -42,7 +42,7 @@ namespace Tatabouf.DAL
             return TataboufContext.Users
                                     .Include(m => m.Choices.Select(c => c.Place))
                                     .Where(m => m.InscriptionDate >= beginDate && m.InscriptionDate < endDate)
-                                    .OrderBy(m => m.Id) // voir s'il est possible d'ordonner par heure de départ (si elle est renseignée)
+                                    .OrderBy(m => m.Id)
                                     .ToList();
         }
 

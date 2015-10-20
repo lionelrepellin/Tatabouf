@@ -24,21 +24,7 @@ namespace Tatabouf.DAL.Configurations
 
             HasKey(t => t.Id);
 
-            //HasMany(t => t.ShippingPrices).WithRequired().HasForeignKey(t => t.ShipperId);
-            //HasMany(t => t.ShippingShippers).WithRequired(t => t.Shipper);
-
             HasMany(t => t.Choices).WithRequired(t => t.User);
-
-            /*
-            HasMany(m => m.SelectedPlaces)
-                    .WithMany()
-                    .Map(list =>
-                    {
-                        list.MapLeftKey("id_user");
-                        list.MapRightKey("id_place");            
-                        list.ToTable("choices");
-                    });
-             */
         }
     }
 }

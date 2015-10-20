@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Tatabouf.Attributes;
-using Tatabouf.Domain;
 
 namespace Tatabouf.Models
 {

@@ -62,58 +62,6 @@ namespace Tatabouf.Tests.Controllers
             Assert.AreEqual("Merci de cocher au moins une case !", GetErrorMessage(viewResult));
         }
 
-        //[TestMethod]
-        //public void Controller_AddWithNameButToMuchChoices()
-        //{
-        //    var selectedPlacesId = new string[] { "1", "2" };
-
-        //    var model = new ContainerModel
-        //    {
-        //        FoodChoice = new UserModel
-        //        {
-        //            Name = "Gérard",
-        //            IBroughtMyLunch = true
-        //        }
-        //    };
-
-        //    var viewResult = (ViewResult)controller.Add(model, selectedPlacesId);
-        //    Assert.AreEqual("Si tatabouf, pourquoi aller chercher bonheur ailleurs ?", GetErrorMessage(viewResult));
-        //}
-
-        //[TestMethod]
-        //public void Controller_AddWithNameButToMuchChoicesAndSeats()
-        //{
-        //    var model = new ContainerModel
-        //    {
-        //        FoodChoice = new UserModel
-        //        {
-        //            Name = "Gérard",
-        //            IBroughtMyLunch = true,
-        //            NumberOfAvailableSeats = 4
-        //        }
-        //    };
-
-        //    var viewResult = (ViewResult)controller.Add(model, null);
-        //    Assert.AreEqual("Tatabouf ou tapatabouf ?", GetErrorMessage(viewResult));
-        //}
-
-        //[TestMethod]
-        //public void Controller_AddIMyLunch()
-        //{
-        //    var model = new ContainerModel
-        //    {
-        //        FoodChoice = new UserModel
-        //        {
-        //            Name = "Raoul",
-        //            IBroughtMyLunch = true
-        //        }
-        //    };
-
-        //    var routeResult = (RedirectToRouteResult)controller.Add(model, null);
-        //    var method = routeResult.RouteValues.First().Value.ToString();
-        //    Assert.AreEqual("Index", method);
-        //}
-
         [TestMethod]
         public void Controller_AddWithNameButNoChoice()
         {
