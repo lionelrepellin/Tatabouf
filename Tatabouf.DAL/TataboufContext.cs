@@ -8,6 +8,7 @@ namespace Tatabouf.DAL
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Place> Places { get; set; }
+        //public DbSet<Choice> Choices { get; set; }
                 
         static TataboufContext()
         {
@@ -25,6 +26,7 @@ namespace Tatabouf.DAL
             var configuration = modelBuilder.Configurations;            
             configuration.Add(new UserConfiguration());
             configuration.Add(new PlaceConfiguration());
+            configuration.Add(new ChoicesConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }

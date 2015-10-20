@@ -22,7 +22,7 @@ namespace Tatabouf.Attributes
             if (value != null)
             {
                 var numberOfSeats = (byte)value;
-                if (numberOfSeats > _maxSeats)
+                if (numberOfSeats < 0 || numberOfSeats > _maxSeats)
                 {
                     return false;
                 }

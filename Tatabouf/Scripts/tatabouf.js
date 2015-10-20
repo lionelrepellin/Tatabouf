@@ -38,7 +38,7 @@ function removeItem(foodChoiceId) {
         url: "/Home/Remove",
         data: { id: foodChoiceId },
         success: function () {
-            document.location = "/Home";
+            document.location = "/Home/Index";
         },
         error: ShowError
     });

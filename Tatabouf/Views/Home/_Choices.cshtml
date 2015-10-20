@@ -5,49 +5,33 @@
 @model Tatabouf.Models.ContainerModel
 
 @{
-    var numberOfColumns = Model.AllPlaces.Count() + 4;
+    var numberOfColumns = Model.Places.Count() + 4;
 }
 
 @functions{
-    string GetClassIHaveMyLunch(bool checkBox)
+    bool IsPlaceSelected(IEnumerable<ChoiceModel> choices, int placeModelId)
     {
-        if (checkBox)
-        {
-            return "i-have-it";
-        }
-        else
-        {
-            return "dont-want-to-go";
-        }
+        var ids = choices.Select(p => p.PlaceId);
+        return ids.Contains(placeModelId);
     }
 
-    string GetSymbol(bool checkBox)
+    string IsTextBox(UserModel user, PlaceModel place)
     {
-        if (checkBox)
-        {
-            return "=)";
-        }
-        else
-        {
-            return "=(";
-        }
-    }
-    
-    bool IsPlaceSelected(IEnumerable<PlaceModel> places, int placeModelId)
-    {
-        var ids = places.Select(p => p.Id);
-        return ids.Contains(placeModelId);
+        return user.ChoiceModels
+                        .Where(u => u.UserId == user.Id && u.PlaceId == place.Id && place.InputType)
+                        .Select(u => u.Other)
+                        .SingleOrDefault();
     }
 }
 
 <table class="tatabouf">
     <thead>
         <tr>
-            <td class="empty">&nbsp;</td>
-            <td class="name">J'ai ma<br />bouffe</td>
-            @foreach (var choice in Model.AllPlaces)
+            <td class="empty" style="background-color:ActiveCaption">@Model.DateOfTheDay</td>
+            <td class="time">Heure de<br />départ</td>            
+            @foreach (var choice in Model.Places)
             {
-                <td class="name">@choice.Label</td>
+                <td class="name">@Html.Raw(choice.Label)</td>
             }
             <td class="name">Places <br />voiture</td>
             <td width="120">&nbsp;</td>
@@ -60,18 +44,26 @@
             {
                 <tr>
                     <td class="label">@user.Name</td>
-                    <td class="@GetClassIHaveMyLunch(user.IBroughtMyLunch)">@GetSymbol(user.IBroughtMyLunch)</td>
-                    @foreach (var place in Model.AllPlaces)
+                    <td class="label">@user.FormattedDepartureTime</td>
+                    @foreach (var place in Model.Places)
                     {
-                        if (IsPlaceSelected(user.Choices, place.Id))
+                        if (IsPlaceSelected(user.ChoiceModels, place.Id))
                         {
-                            <td class="want-to-go">=)</td>
+                            var other = IsTextBox(user, place);
+                            if (!string.IsNullOrEmpty(other))
+                            {
+                                <td class="@place.Css">@other</td>
+                            }
+                            else
+                            {
+                                <td class="@place.Css">=)</td>
+                            }
                         }
                         else
                         {
                             <td class="dont-want-to-go">=(</td>
                         }
-                    }                    
+                    }
                     <td class="number-of-seats"><span>@user.NumberOfAvailableSeats</span></td>
                     <td class="actions">
                         @if (user.IP == Model.IpVisitor)

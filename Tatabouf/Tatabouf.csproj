@@ -183,6 +183,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Models\ChoiceModel.cs" />
     <Compile Include="Models\PlaceModel.cs" />
     <Compile Include="Unity\Bootstrapper.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -266,9 +267,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\prepros.cfg" />
-    <Content Include="Content\stylesheet.css.map">
-      <DependentUpon>stylesheet.css</DependentUpon>
-    </Content>
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>

@@ -17,21 +17,28 @@ namespace Tatabouf.DAL.Configurations
 
             Property(t => t.Id).HasColumnName("id").HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(t => t.Name).HasColumnName("name");
-            Property(t => t.IHaveMyLunch).HasColumnName("i_have_my_lunch");
             Property(t => t.AvailableSeats).HasColumnName("available_seats");
             Property(t => t.InscriptionDate).HasColumnName("inscription_date");
+            Property(t => t.DepartureTime).HasColumnName("departure_time");
             Property(t => t.IpAddress).HasColumnName("ip_address");
 
             HasKey(t => t.Id);
 
+            //HasMany(t => t.ShippingPrices).WithRequired().HasForeignKey(t => t.ShipperId);
+            //HasMany(t => t.ShippingShippers).WithRequired(t => t.Shipper);
+
+            HasMany(t => t.Choices).WithRequired(t => t.User);
+
+            /*
             HasMany(m => m.SelectedPlaces)
                     .WithMany()
                     .Map(list =>
                     {
                         list.MapLeftKey("id_user");
-                        list.MapRightKey("id_place");
+                        list.MapRightKey("id_place");            
                         list.ToTable("choices");
                     });
+             */
         }
     }
 }

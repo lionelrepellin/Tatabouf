@@ -30,7 +30,7 @@ namespace Tatabouf.Tests.Business
             Assert.IsFalse(result);
             Assert.AreEqual("Le nom existe déjà !", errorMessage);
         }
-
+        
         [TestMethod]
         public void ControlSameNameExists_EmptyUsersList()
         {
@@ -44,7 +44,7 @@ namespace Tatabouf.Tests.Business
             Assert.IsTrue(result);
             Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
         }
-
+        
         [TestMethod]
         public void ControlSameNameExists_ItWorksFine()
         {
@@ -64,12 +64,15 @@ namespace Tatabouf.Tests.Business
             Assert.IsTrue(result);
             Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
         }
-
+        
         [TestMethod]
         public void ControlCheckBoxes_NoChoiceMade()
         {
             var errorMessage = string.Empty;
-            var user = new User();
+            var user = new User
+            {
+                Choices = new List<Choice>()
+            };
 
             var service = new ValidationService();
             var result = service.ControlCheckBoxes(user, out errorMessage);
@@ -77,79 +80,7 @@ namespace Tatabouf.Tests.Business
             Assert.IsFalse(result);
             Assert.AreEqual("Merci de cocher au moins une case !", errorMessage);
         }
-
-        [TestMethod]
-        public void ControlCheckBoxes_IHaveMyLunchAndOtherChoice()
-        {
-            var errorMessage = string.Empty;
-            var user = new User
-            {
-                IHaveMyLunch = true,
-                SelectedPlaces = new List<Place> { new Place { Label = "Carrefour" } }
-            };
-
-            var service = new ValidationService();
-            var result = service.ControlCheckBoxes(user, out errorMessage);
-
-            Assert.IsFalse(result);
-            Assert.AreEqual("Si tatabouf, pourquoi aller chercher bonheur ailleurs ?", errorMessage);
-        }
-
-        [TestMethod]
-        public void ControlCheckBoxes_IHaveMyLunchAndAvailableSeats()
-        {
-            var errorMessage = string.Empty;
-            var user = new User
-            {
-                IHaveMyLunch = true,
-                AvailableSeats = 2
-            };
-
-            var service = new ValidationService();
-            var result = service.ControlCheckBoxes(user, out errorMessage);
-
-            Assert.IsFalse(result);
-            Assert.AreEqual("Tatabouf ou tapatabouf ?", errorMessage);
-        }
-
-        [TestMethod]
-        public void ControlCheckBoxes_AllIsChecked()
-        {
-            var errorMessage = string.Empty;
-            var user = new User
-            {
-                IHaveMyLunch = true,
-                AvailableSeats = 2,
-                SelectedPlaces = new List<Place> { 
-                    new Place { Label = "Carrefour" },
-                    new Place { Label = "Quick" }, 
-                    new Place { Label = "Autre" } 
-                }
-            };
-
-            var service = new ValidationService();
-            var result = service.ControlCheckBoxes(user, out errorMessage);
-
-            Assert.IsFalse(result);
-            Assert.AreEqual("Si tatabouf, pourquoi aller chercher bonheur ailleurs ?", errorMessage);
-        }
-
-        [TestMethod]
-        public void ControlCheckBoxes_IHaveMyLunch()
-        {
-            var errorMessage = string.Empty;
-            var user = new User
-            {
-                IHaveMyLunch = true
-            };
-
-            var service = new ValidationService();
-            var result = service.ControlCheckBoxes(user, out errorMessage);
-
-            Assert.IsTrue(result);
-            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
-        }
-
+        
         [TestMethod]
         public void ControlCheckBoxes_IMadeChoices()
         {
@@ -157,11 +88,12 @@ namespace Tatabouf.Tests.Business
             var user = new User
             {
                 AvailableSeats = 2,
-                SelectedPlaces = new List<Place> { 
-                    new Place { Label = "Carrefour" },
-                    new Place { Label = "Quick" }, 
-                    new Place { Label = "Autre" } 
-                }
+                Choices = new List<Choice>
+                {
+                    new Choice { Place = new Place { Label = "Carrefour"} },
+                    new Choice { Place = new Place { Label = "Quick"} },
+                    new Choice { Place = new Place { Label = "Autre"} },
+                }                
             };
 
             var service = new ValidationService();
@@ -170,5 +102,6 @@ namespace Tatabouf.Tests.Business
             Assert.IsTrue(result);
             Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
         }
+ 
     }
 }

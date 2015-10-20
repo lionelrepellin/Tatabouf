@@ -69,6 +69,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configurations\ChoicesConfiguration.cs" />
     <Compile Include="Configurations\PlaceConfiguration.cs" />
     <Compile Include="Configurations\UserConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

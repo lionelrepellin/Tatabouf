@@ -15,7 +15,7 @@ namespace Tatabouf.DAL
         IEnumerable<Place> GetPlaces();
         IEnumerable<User> GetUsersChoices(DateTime beginDate, DateTime endDate);
         User FindById(int userId);
-        IEnumerable<Place> FindPlacesByIds(List<int> placesId);
+        User FindByIpAddress(string ip);
     }
 
     public class FoodChoiceRepository : IFoodChoiceRepository
@@ -32,17 +32,18 @@ namespace Tatabouf.DAL
         public User FindById(int userId)
         {
             return TataboufContext.Users
-                            .Include(m => m.SelectedPlaces)
-                            .Where(m => m.Id == userId)
-                            .SingleOrDefault();
+                                    .Include(m => m.Choices.Select(c => c.Place))
+                                    .Where(m => m.Id == userId)
+                                    .SingleOrDefault();
         }
 
         public IEnumerable<User> GetUsersChoices(DateTime beginDate, DateTime endDate)
         {
             return TataboufContext.Users
-                            .Include(m => m.SelectedPlaces)
-                            .Where(m => m.InscriptionDate >= beginDate && m.InscriptionDate < endDate)
-                            .OrderBy(m => m.Id).ToList();
+                                    .Include(m => m.Choices.Select(c => c.Place))
+                                    .Where(m => m.InscriptionDate >= beginDate && m.InscriptionDate < endDate)
+                                    .OrderBy(m => m.Id) // voir s'il est possible d'ordonner par heure de départ (si elle est renseignée)
+                                    .ToList();
         }
 
         public void Delete(User user)
@@ -50,25 +51,29 @@ namespace Tatabouf.DAL
             TataboufContext.Users.Remove(user);
             TataboufContext.SaveChanges();
         }
-
+        
         public IEnumerable<Place> GetPlaces()
         {
-            return TataboufContext.Places.OrderBy(p => p.DisplayOrder).ToList();
-        }
-
-        public IEnumerable<Place> FindPlacesByIds(List<int> placesId)
-        {
-            return TataboufContext.Places.Where(p => placesId.Contains(p.Id)).ToList();
+            return TataboufContext.Places
+                                    .OrderBy(p => p.DisplayOrder)
+                                    .ToList();
         }
 
         public void Update(User originalUser, User newUser)
         {
-            // name and ip address are not updated
-            // inscription date is not updated
-            originalUser.IHaveMyLunch = newUser.IHaveMyLunch;
-            originalUser.AvailableSeats = newUser.AvailableSeats;
-            originalUser.SelectedPlaces = newUser.SelectedPlaces;
+            // all fields are not updated
+            originalUser.AvailableSeats = newUser.AvailableSeats;            
+            originalUser.DepartureTime = newUser.DepartureTime;
+            originalUser.Choices = newUser.Choices;
             TataboufContext.SaveChanges();
         }
+        
+        public User FindByIpAddress(string ip)
+        {
+            return TataboufContext.Users
+                                    .OrderByDescending(u => u.Id)                    
+                                    .Where(u => u.IpAddress == ip)
+                                    .FirstOrDefault();
+        }        
     }
 }

@@ -15,5 +15,18 @@ namespace Tatabouf.Domain
         /// display column order (form left to right)
         /// </summary>
         public byte DisplayOrder { get; set; }
+
+        /// <summary>
+        /// input checkbox or input text 
+        /// </summary>
+        /// <example>True = Text</example>
+        public bool InputType { get; set; }
+
+        /// <summary>
+        /// Css class used where choice is selected
+        /// </summary>
+        public string Css { get; set; }
+
+        public virtual ICollection<Choice> Choices { get; set; }
     }
 }

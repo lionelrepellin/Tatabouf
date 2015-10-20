@@ -13,17 +13,7 @@ namespace Tatabouf.Tests.Business
     [TestClass]
     public class FoodChoiceServiceTest : BaseTest
     {
-        [TestInitialize]
-        public void Initialize()
-        {
-            _user = new User
-            {
-                Id = _userId,
-                Name = "lionel",
-                IpAddress = "192.168.0.1"
-            };            
-        }
-
+        
         [TestMethod]
         public void FoodChoiceService_AddUser()
         {
@@ -38,7 +28,16 @@ namespace Tatabouf.Tests.Business
                 Name = "lionel",
                 IpAddress = "192.168.0.1",
                 AvailableSeats = 2,
-                IHaveMyLunch = true
+                Choices = new List<Choice>
+                {
+                    new Choice 
+                    { 
+                        Place = new Place 
+                        { 
+                            Label = "Marie Blachère", InputType = false 
+                        }
+                    }
+                }
             };
 
             // Act
@@ -47,7 +46,7 @@ namespace Tatabouf.Tests.Business
             // Assert
             repositoryMock.Verify(r => r.Add(user));
         }
-
+        
         [TestMethod]
         public void FoodChoiceService_FindUserById()
         {
@@ -62,7 +61,7 @@ namespace Tatabouf.Tests.Business
             Assert.IsNotNull(user);
             repositoryMock.Verify(r => r.FindById(userId));
         }
-
+        
         [TestMethod]
         public void FoodChoiceService_GetPlaces()
         {
@@ -89,22 +88,7 @@ namespace Tatabouf.Tests.Business
 
             repositoryMock.Verify(r => r.GetUsersChoices(today, tomorrow));
         }
-
-        [TestMethod]
-        public void FoodChoiceService_FindPlacesByIds()
-        {
-            var repositoryMock = GetRepositoryMock();
-
-            var service = new FoodChoiceService();
-            service.FoodChoiceRepository = repositoryMock.Object;
-
-            var selectedIdString = new string[] { "1", "2", "3", "4" };
-            var selectedIdInt = new List<int> { 1, 2, 3, 4 };
-
-            var result = service.FindPlacesByIds(selectedIdString);
-            repositoryMock.Verify(r => r.FindPlacesByIds(selectedIdInt));
-        }
-
+        
         [TestMethod]
         public void FoodChoiceService_DeleteUser_Ok()
         {
@@ -121,7 +105,7 @@ namespace Tatabouf.Tests.Business
             repositoryMock.Verify(r => r.FindById(userId));
             repositoryMock.Verify(r => r.Delete(_user));
         }
-
+        
         [TestMethod]
         public void FoodChoiceService_DeleteUser_IpAddressIncorrect()
         {
@@ -155,7 +139,7 @@ namespace Tatabouf.Tests.Business
             repositoryMock.Verify(r => r.FindById(userId));
             repositoryMock.Verify(r => r.Delete(_user), Times.Never);
         }
-
+        
         [TestMethod]
         public void FoodChoiceService_UpdateUser_Ok()
         {
@@ -164,9 +148,9 @@ namespace Tatabouf.Tests.Business
             {
                 Id = _userId,
                 Name = "lionel",
-                SelectedPlaces = new List<Place>{
-                    new Place { Id = 1, Label = "Carrefour" },
-                    new Place { Id = 1, Label = "Quick" }
+                Choices = new List<Choice> {
+                    new Choice { Place = new Place { Id = 1, Label = "Carrefour" } },
+                    new Choice { Place = new Place { Id = 1, Label = "Quick" } },
                 }
             };
 
@@ -182,6 +166,7 @@ namespace Tatabouf.Tests.Business
             repositoryMock.Verify(r => r.FindById(userId));
             repositoryMock.Verify(r => r.Update(_user, userUpdated));
         }
+        
 
         [TestMethod]
         public void FoodChoiceService_UpdateUser_IpAddressIncorrect()
@@ -191,10 +176,10 @@ namespace Tatabouf.Tests.Business
             {
                 Id = _userId,
                 Name = "lionel",
-                SelectedPlaces = new List<Place>{
-                    new Place { Id = 1, Label = "Carrefour" },
-                    new Place { Id = 1, Label = "Quick" }
-                }
+                Choices = new List<Choice> {
+                    new Choice { Place = new Place { Id = 1, Label = "Carrefour" } },
+                    new Choice { Place = new Place { Id = 1, Label = "Quick" } },
+                }                
             };
 
             const string ipAddressToCompare = "127.0.0.1";
@@ -218,9 +203,9 @@ namespace Tatabouf.Tests.Business
             {
                 Id = userId,
                 Name = "lionel",
-                SelectedPlaces = new List<Place>{
-                    new Place { Id = 1, Label = "Carrefour" },
-                    new Place { Id = 1, Label = "Quick" }
+                Choices = new List<Choice> {
+                    new Choice { Place = new Place { Id = 1, Label = "Carrefour" } },
+                    new Choice { Place = new Place { Id = 1, Label = "Quick" } },
                 }
             };
 

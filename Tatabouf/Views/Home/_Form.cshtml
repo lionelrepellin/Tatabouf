@@ -1,61 +1,92 @@
 ﻿@model Tatabouf.Models.ContainerModel
+@using Tatabouf.Domain
 @using Tatabouf.Models
 
 @functions {
 
-    string Checkbox(IEnumerable<PlaceModel> places, int placeId)
+    string CheckBox(IEnumerable<ChoiceModel> places, int placeId)
     {
         if (Model.FoodChoice.ActionName == Tatabouf.Models.Action.Add)
         {
             return string.Empty;
         }
-        
-        var ids = places.Select(p => p.Id);
+
+        var ids = places.Select(p => p.PlaceId);
         if (ids.Contains(placeId))
         {
             return " checked=\"checked\"";
         }
         return string.Empty;
     }
+    
+    string TextBox(IEnumerable<ChoiceModel> places, int placeId)
+    {
+        if (Model.FoodChoice.ActionName == Tatabouf.Models.Action.Add)
+        {
+            return string.Empty;
+        }
 
+        var other = places.Where(p => p.PlaceId == placeId).Select(p => p.Other).SingleOrDefault();
+        if(other != null)
+        {
+            return other;
+        }
+        return string.Empty;
+    }
 }
 
-@using (Html.BeginForm(Model.FoodChoice.ActionName.ToString(), "Home", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
+@if(Model.ShowForm)
+{ 
+    using (Html.BeginForm(Model.FoodChoice.ActionName.ToString(), "Home", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
 
-    <table class="formulaire">
-        <tr>
-            <td class="label say-my-name">
-                @if (Model.FoodChoice.ActionName == Tatabouf.Models.Action.Add)
-                {
-                    @*Html.EditorFor(t => t.FoodChoice.Name)*@
-                    @Html.TextBoxFor(t => t.FoodChoice.Name, new { placeholder = "Pseudo", maxlength = 15 })
-                }
-                else
-                {
-                    @Model.FoodChoice.Name
-                    @Html.HiddenFor(t => t.FoodChoice.Name)
-                }
-            </td>
-            <td class="choice">
-                @Html.CheckBoxFor(t => t.FoodChoice.IBroughtMyLunch)
-            </td>
-            @foreach (var place in Model.AllPlaces)
-            {
-                <td class="choice">
-                    <input type="checkbox" name="selectedPlacesId" value="@place.Id" @Checkbox(Model.FoodChoice.Choices, place.Id) />                    
+        <table class="formulaire">
+            <tr>
+                <td class="label say-my-name">
+                    @if (Model.FoodChoice.ActionName == Tatabouf.Models.Action.Add)
+                    {
+                        @Html.TextBoxFor(t => t.FoodChoice.Name, new { placeholder = "Pseudo", maxlength = 15 })
+                    }
+                    else
+                    {
+                        @Model.FoodChoice.Name
+                        @Html.HiddenFor(t => t.FoodChoice.Name)
+                    }
                 </td>
-            }
-            <td class="choice number-of-seats">
-                @Html.TextBoxFor(t => t.FoodChoice.NumberOfAvailableSeats, new { maxlength = 2 })
-            </td>
-            <td class="actions">
-                <img src="~/Content/save.png" alt="Enregistrer" class="icon save" />
-            </td>
-            @Html.HiddenFor(t => t.FoodChoice.Id)
-        </tr>
+                <td class="choice">
+                    <input type="time" name="FoodChoice.DepartureTime" value="@Model.FoodChoice.DefaultDepartureTime" size="6" />
+                </td>
+                @{
+                    int i = 0;
 
-    </table>
-    @Html.ValidationSummary()
+                    foreach (var place in Model.Places)
+                    {
+                        <td class="choice">
+                        @if (place.InputType)
+                        {
+                            <input type="text" name="Choices[@i].Other" value="@TextBox(Model.FoodChoice.ChoiceModels, place.Id)" size="6" />
+                            <input type="hidden" name="Choices[@i].PlaceId" value="@place.Id" />
+                        }
+                        else
+                        {
+                            <input type="checkbox" name="Choices[@i].PlaceId" value="@place.Id" @CheckBox(Model.FoodChoice.ChoiceModels, place.Id) />
+                            <input type="hidden" name="Choices[@i].Other" value="" />
+                        }
+                        </td>
+                        i++;
+                    }
+                }
+                <td class="choice number-of-seats">
+                    @Html.TextBoxFor(t => t.FoodChoice.NumberOfAvailableSeats, new { maxlength = 2 })
+                </td>
+                <td class="actions">
+                    <img src="~/Content/save.png" alt="Enregistrer" class="icon save" />
+                </td>
+                @Html.HiddenFor(t => t.FoodChoice.Id)
+            </tr>
+
+        </table>
+        @Html.ValidationSummary()
+    }
 }

@@ -21,31 +21,18 @@ namespace Tatabouf.Business
                 errorMessage = error;
                 return false;
             }
-
             errorMessage = error;
             return true;
         }
         
         public bool ControlCheckBoxes(User user, out string errorMessage)
         {
-            var choicesCount = user.SelectedPlaces.Count();
-
-            if (choicesCount == 0 && !user.IHaveMyLunch)
+            var choicesCount = user.Choices.Count();
+            if (choicesCount == 0)
             {
                 errorMessage = "Merci de cocher au moins une case !";
                 return false;
-            }
-            else if (user.IHaveMyLunch && choicesCount > 0)
-            {
-                errorMessage = "Si tatabouf, pourquoi aller chercher bonheur ailleurs ?";
-                return false;
-            }
-            else if (user.IHaveMyLunch && user.AvailableSeats.HasValue && user.AvailableSeats.Value > 0)
-            {
-                errorMessage = "Tatabouf ou tapatabouf ?";
-                return false;
-            }
-
+            }            
             errorMessage = string.Empty;
             return true;
         }
@@ -58,13 +45,11 @@ namespace Tatabouf.Business
                 errorMessage = string.Empty;
                 return true;
             }
-
             if (IsNameAlreadyExists(name, userChoices))
             {
                 errorMessage = "Le nom existe déjà !";
                 return false;
             }
-
             errorMessage = string.Empty;
             return true;
         }
@@ -78,6 +63,27 @@ namespace Tatabouf.Business
                 return names.Contains(name);
             }
             return false;
+        }
+
+        // Try to prevent hacks from GDE ;)
+        public void RemoveInvalidEntry(User user, IEnumerable<Place> places)
+        {
+            var validatedChoices = new List<Choice>();
+
+            foreach (var userChoice in user.Choices)
+            {
+                // check if place id use the right input type
+                var validPlace = places.Where(p => p.Id == userChoice.PlaceId
+                                                && ((p.InputType && !string.IsNullOrEmpty(userChoice.OtherIdea)) // input text
+                                                || (!p.InputType && string.IsNullOrEmpty(userChoice.OtherIdea)))) // checkbox
+                                                .SingleOrDefault();
+
+                if (validPlace != null)
+                {
+                    validatedChoices.Add(userChoice);
+                }
+            }
+            user.Choices = validatedChoices;
         }
     }
 }

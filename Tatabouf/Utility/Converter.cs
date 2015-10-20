@@ -1,38 +1,73 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Linq;
+using System.Collections.Generic;
 using Tatabouf.Domain;
 using Tatabouf.Models;
 
 namespace Tatabouf.Utility
 {
-    //TODO replace converter by AutoMapper
     public static class Converter
     {
         public static UserModel UserToFoodChoiceModel(User userChoice)
         {
+            var choiceModels = userChoice.Choices.Select(c => new ChoiceModel
+            {
+                UserId = c.UserId,
+                PlaceId = c.PlaceId,
+                Other = c.OtherIdea                
+            }).ToList();
+            
             return new UserModel
             {
                 Id = userChoice.Id,
                 Name = userChoice.Name,
-                IBroughtMyLunch = userChoice.IHaveMyLunch,
                 NumberOfAvailableSeats = userChoice.AvailableSeats,
                 IP = userChoice.IpAddress,
-                Choices = PlacesToPlaceModels(userChoice.SelectedPlaces)
+                DepartureTime = userChoice.DepartureTime,
+                ChoiceModels = choiceModels
             };
         }
-
-        public static User UserModelToUser(UserModel model)
+                
+        public static User UserModelToUser(ContainerModel model)
         {
+            // select only checked box: PlaceId > 0
+            var choices = model.Choices.Where(c => c.PlaceId > 0).Select(c => new Choice
+            {
+                UserId = c.UserId,
+                PlaceId = c.PlaceId,                
+                OtherIdea = CheckOtherIdeaValue(c.Other)
+            });
+
             return new User
             {
-                Id = model.Id,
-                Name = model.Name,
-                IHaveMyLunch = model.IBroughtMyLunch,
-                AvailableSeats = model.NumberOfAvailableSeats,
-                IpAddress = model.IP,
-                SelectedPlaces = PlaceModelsToPlaces(model.Choices)
+                Id = model.FoodChoice.Id,
+                Name = model.FoodChoice.Name,
+                AvailableSeats = model.FoodChoice.NumberOfAvailableSeats,
+                IpAddress = model.FoodChoice.IP,
+                DepartureTime = model.FoodChoice.DepartureTime,
+                Choices = choices.ToList()
             };
         }
 
+        private static string CheckOtherIdeaValue(string idea)
+        {
+            const int maxChars = 20;
+
+            if (string.IsNullOrEmpty(idea) || string.IsNullOrWhiteSpace(idea))
+            {
+                return null;
+            }
+            else
+            {
+                idea = idea.Trim();
+                if (idea.Length > maxChars)
+                {
+                    idea = idea.Substring(0, maxChars);
+                }
+                return idea;
+            }
+        }
+        
         public static ICollection<Place> PlaceModelsToPlaces(IEnumerable<PlaceModel> choices)
         {
             var places = new List<Place>();
@@ -48,7 +83,9 @@ namespace Tatabouf.Utility
             return new Place
             {
                 Id = model.Id,
-                Label = model.Label
+                Label = model.Label,
+                InputType = model.InputType,
+                Css = model.Css
             };
         }
 
@@ -73,7 +110,9 @@ namespace Tatabouf.Utility
             return new PlaceModel
             {
                 Id = place.Id,
-                Label = place.Label
+                Label = place.Label,
+                InputType = place.InputType,
+                Css = place.Css
             };
         }
     }

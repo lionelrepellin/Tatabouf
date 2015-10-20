@@ -17,6 +17,11 @@ namespace Tatabouf.DAL.Configurations
             Property(t => t.Id).HasColumnName("id").HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(t => t.Label).HasColumnName("name");
             Property(t => t.DisplayOrder).HasColumnName("display_order");
+            Property(t => t.InputType).HasColumnName("input_type");
+            Property(t => t.Css).HasColumnName("css_class");
+
+            //HasMany(t => t.ShippingShippers).WithRequired(t => t.Shipping);
+            HasMany(t => t.Choices).WithRequired(t => t.Place);
 
             HasKey(t => t.Id);
         }
