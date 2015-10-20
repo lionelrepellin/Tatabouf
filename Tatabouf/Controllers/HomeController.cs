@@ -14,20 +14,20 @@ namespace Tatabouf.Controllers
         public ActionResult Index()
         {
             var places = FoodChoiceService.GetPlaces();
-            var usersChoices = FoodChoiceService.GetTodayUsersChoices();            
-            var ipAddress = GetIP(Request);            
+            var usersChoices = FoodChoiceService.GetTodayUsersChoices();
+            var ipAddress = GetIP(Request);
 #if DEBUG
             var userAlreadyRegistered = false;
             User user = null;
 #else
-            var userAlreadyRegistered = FoodChoiceService.UserAlreadyRegisteredToday(ip);
+            var userAlreadyRegistered = FoodChoiceService.UserAlreadyRegisteredToday(ipAddress);
             var user = FoodChoiceService.FindUserByIpAddress(ipAddress);
 #endif
             var model = new ContainerModel()
             {
                 // empty form
                 FoodChoice = new UserModel{
-                    Name = user == null ? null : user.Name                    
+                    Name = user == null ? null : user.Name
                 },
 
                 // users choices list
@@ -117,7 +117,7 @@ namespace Tatabouf.Controllers
             var ipAddress = GetIP(Request);
 
             if (ModelState.IsValid)
-            {                
+            {
                 var user = Converter.UserModelToUser(model);
 
                 // check choices consistency
