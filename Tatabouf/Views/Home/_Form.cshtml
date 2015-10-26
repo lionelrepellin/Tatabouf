@@ -55,14 +55,14 @@
                     }
                 </td>
                 <td class="choice">
-                    <input type="time" name="FoodChoice.DepartureTime" value="@Model.FoodChoice.DefaultDepartureTime" size="6" />
+                    <input type="time" name="FoodChoice.DepartureTime" value="@Model.FoodChoice.FormattedDepartureTime" size="6" />
                 </td>
                 @{
                     int i = 0;
 
                     foreach (var place in Model.Places)
                     {
-                        <td class="choice">
+                        <td class="choice other">
                         @if (place.InputType)
                         {
                             <input type="text" name="Choices[@i].Other" value="@TextBox(Model.FoodChoice.ChoiceModels, place.Id)" size="6" />

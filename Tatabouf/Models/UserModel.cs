@@ -16,8 +16,6 @@ namespace Tatabouf.Models
 
     public class UserModel
     {
-        private const string _defaultDepartureTime = "13:00";
-
         public int Id { get; set; }
 
         public Action ActionName
@@ -34,14 +32,6 @@ namespace Tatabouf.Models
 
         public DateTime? DepartureTime { get; set; }
 
-        public string DefaultDepartureTime
-        {
-            get
-            {
-                return _defaultDepartureTime;        
-            }
-        }
-
         public string FormattedDepartureTime
         {
             get
@@ -52,8 +42,8 @@ namespace Tatabouf.Models
 
         public IEnumerable<ChoiceModel> ChoiceModels { get; set; }
 
-        [CheckNumberOfSeats("4 places maxi autorisées: t'as pas un bus !", 4)]
-        public byte? NumberOfAvailableSeats { get; set; }
+        [CheckNumberOfSeats("Nombre de places autorisées: entre 0 et 4", 4)]
+        public short? NumberOfAvailableSeats { get; set; }
 
         public string IP { get; set; }
     }

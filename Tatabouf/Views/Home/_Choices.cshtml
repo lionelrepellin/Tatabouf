@@ -27,8 +27,8 @@
 <table class="tatabouf">
     <thead>
         <tr>
-            <td class="empty" style="background-color:ActiveCaption">@Model.DateOfTheDay</td>
-            <td class="time">Heure de<br />départ</td>            
+            <td class="dday">@Model.DateOfTheDay</td>
+            <td class="time name">Heure de<br />départ</td>            
             @foreach (var choice in Model.Places)
             {
                 <td class="name">@Html.Raw(choice.Label)</td>
@@ -44,7 +44,7 @@
             {
                 <tr>
                     <td class="label">@user.Name</td>
-                    <td class="label">@user.FormattedDepartureTime</td>
+                    <td class="label text-center">@user.FormattedDepartureTime</td>
                     @foreach (var place in Model.Places)
                     {
                         if (IsPlaceSelected(user.ChoiceModels, place.Id))
@@ -57,7 +57,7 @@
                             else
                             {
                                 <td class="@place.Css">=)</td>
-                            }
+                            }   
                         }
                         else
                         {

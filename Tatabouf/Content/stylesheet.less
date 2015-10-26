@@ -128,10 +128,11 @@ body{
                             vertical-align: middle;
                             text-transform: uppercase;
                             &.name{
-                                width: 120px;
+                                width: 105px;
                             }
-                            &.empty{
-                                background-color: #FFF;
+                            &.dday{
+                                background-color: #F0F2F4;
+                                color: #A6B2C2;
                             }
                         }
                     }
@@ -168,7 +169,7 @@ body{
                                 span{
                                     background-color: #F0F2F4;
                                     border: 0;
-                                    color: #2B3D51;
+                                    color: #A6B2C2;
                                     display: block;
                                     font-size: 14px;
                                     font-weight: bold;
@@ -179,6 +180,14 @@ body{
                                     width: 50%;
                                 }
                             }
+                            &.other{
+                                background-color: #F0F2F4;
+                                color: #A6B2C2;
+                                font-size: 14px;
+                                font-weight: bold;
+                                text-align: center;
+                                text-transform: uppercase;                               
+                            }
                             &.actions{
                                 color: #2B3D51;
                                 cursor: pointer;
@@ -186,7 +195,7 @@ body{
                                 font-size: 14px;
                                 text-transform: uppercase;
                                 text-align: center;
-                                width: 120px;
+                                width: 105px;
                                 .icon{
                                     cursor: pointer;
                                     margin-right: 30px;
@@ -231,7 +240,7 @@ body{
                                 }
                             }
                             &.choice{
-                                width: 120px;
+                                width: 105px;
                             }
                             &.number-of-seats{
                                 min-height: 30px;
@@ -244,6 +253,19 @@ body{
                                     text-align: center;
                                     padding: 7px;
                                     width: 50%;
+                                }
+                            }
+                            &.other{
+                                input{
+                                    background-color: #F0F2F4;
+                                    border: 0;
+                                    color: #2B3D51;
+                                    font-size: 14px;
+                                    font-weight: bold;
+                                    text-align: center;
+                                    text-transform: uppercase;
+                                    padding: 7px;
+                                    width: 80%;
                                 }
                             }
                             &.actions{
@@ -289,7 +311,20 @@ body{
                         &.say-my-name{
                             padding-left: 20px;
                             text-align: left;
-                        }                        
+                        }      
+                        &.other{
+                            input{
+                                background-color: #F0F2F4;
+                                border: 0;
+                                color: #2B3D51;
+                                font-size: 14px;
+                                font-weight: bold;
+                                text-align: center;
+                                text-transform: uppercase;
+                                padding: 7px;
+                                width: 80%;
+                            }                               
+                        }                  
                     }
                 }                
                 &.delete{
@@ -354,5 +389,6 @@ body{
                 }
             }
         }
+        .text-center{ text-align: center !important; }
     }
 }

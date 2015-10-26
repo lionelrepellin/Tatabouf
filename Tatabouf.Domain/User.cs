@@ -14,7 +14,7 @@ namespace Tatabouf.Domain
         /// <summary>
         /// number of available seats in my car
         /// </summary>
-        public byte? AvailableSeats { get; set; }
+        public short? AvailableSeats { get; set; }
         
         public DateTime InscriptionDate { get; set; }
 
