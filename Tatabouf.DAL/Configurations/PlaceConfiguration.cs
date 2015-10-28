@@ -19,6 +19,7 @@ namespace Tatabouf.DAL.Configurations
             Property(t => t.DisplayOrder).HasColumnName("display_order");
             Property(t => t.InputType).HasColumnName("input_text");
             Property(t => t.Css).HasColumnName("css_class");
+            Property(t => t.Priority).HasColumnName("priority");
 
             HasMany(t => t.Choices).WithRequired(t => t.Place);
 

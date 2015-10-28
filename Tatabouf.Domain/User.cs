@@ -15,13 +15,21 @@ namespace Tatabouf.Domain
         /// number of available seats in my car
         /// </summary>
         public short? AvailableSeats { get; set; }
-        
+
         public DateTime InscriptionDate { get; set; }
 
         public DateTime? DepartureTime { get; set; }
 
         public string IpAddress { get; set; }
-        
+
+        public virtual byte Position
+        {
+            get
+            {
+                return Choices.Min(o => o.Place.Priority);
+            }
+        }
+
         /// <summary>
         /// user choices list
         /// </summary>

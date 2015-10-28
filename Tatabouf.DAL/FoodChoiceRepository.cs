@@ -42,7 +42,8 @@ namespace Tatabouf.DAL
             return TataboufContext.Users
                                     .Include(m => m.Choices.Select(c => c.Place))
                                     .Where(m => m.InscriptionDate >= beginDate && m.InscriptionDate < endDate)
-                                    .OrderBy(m => m.Id)
+                                    .ToList()
+                                    .OrderBy(m => m.Position)
                                     .ToList();
         }
 

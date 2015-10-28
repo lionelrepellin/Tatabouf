@@ -42,6 +42,7 @@ CREATE TABLE [dbo].[place](
 	[display_order] [tinyint] NOT NULL,
 	[input_text] [bit] NOT NULL,
 	[css_class] [varchar](10) NOT NULL,
+	[priority] [tinyint] NOT NULL,
  CONSTRAINT [PK_place_id] PRIMARY KEY CLUSTERED
 (
 	[id] ASC
@@ -94,10 +95,17 @@ GO
 ALTER TABLE [dbo].[choices] CHECK CONSTRAINT [FK_choices_user]
 GO
 
-INSERT place(name, display_order, input_text, css_class) VALUES('J''ai ma<br/>bouffe', 1, 0, 'i-have-it')
-INSERT place(name, display_order, input_text, css_class) VALUES('Carrefour', 2, 0, 'want-to-go')
-INSERT place(name, display_order, input_text, css_class) VALUES('Quick', 3, 0, 'want-to-go')
-INSERT place(name, display_order, input_text, css_class) VALUES('Marie<br/>Blachère', 4, 0, 'want-to-go')
-INSERT place(name, display_order, input_text, css_class) VALUES('Kébab', 5, 0, 'want-to-go')
-INSERT place(name, display_order, input_text, css_class) VALUES('Autre', 6, 1, 'other')
+INSERT place(name, display_order, input_text, css_class, [priority]) VALUES('J''ai ma<br/>bouffe', 1, 0, 'i-have-it', 2)
+INSERT place(name, display_order, input_text, css_class, [priority]) VALUES('Carrefour', 2, 0, 'want-to-go', 0)
+INSERT place(name, display_order, input_text, css_class, [priority]) VALUES('Quick', 3, 0, 'want-to-go', 0)
+INSERT place(name, display_order, input_text, css_class, [priority]) VALUES('Marie<br/>Blachère', 4, 0, 'want-to-go', 0)
+INSERT place(name, display_order, input_text, css_class, [priority]) VALUES('Kébab', 5, 0, 'want-to-go', 0)
+INSERT place(name, display_order, input_text, css_class, [priority]) VALUES('Autre', 6, 1, 'other', 1)
 
+GO
+
+SELECT * FROM [place]
+
+SELECT * FROM [choices]
+
+SELECT * FROM [user]

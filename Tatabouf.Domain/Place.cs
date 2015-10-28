@@ -27,6 +27,8 @@ namespace Tatabouf.Domain
         /// </summary>
         public string Css { get; set; }
 
+        public byte Priority { get; set; }
+
         public virtual ICollection<Choice> Choices { get; set; }
     }
 }
