@@ -26,6 +26,7 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>12.0</OldToolsVersion>
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -200,6 +201,7 @@
     <Compile Include="Models\ContainerModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Attributes\CheckNumberOfSeatsAttribute.cs" />
+    <Compile Include="Unity\HttpContextLifetimeManager.cs" />
     <Compile Include="Utility\Converter.cs" />
   </ItemGroup>
   <ItemGroup>

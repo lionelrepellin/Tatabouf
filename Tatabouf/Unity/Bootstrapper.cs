@@ -23,12 +23,22 @@ namespace Tatabouf.Unity
 
             // register all your components with the container here
             // it is NOT necessary to register your controllers
-            container.RegisterType<IFoodChoiceRepository, FoodChoiceRepository>();
-            container.RegisterType<TataboufContext>();
-            container.RegisterType<ValidationService>();
-            container.RegisterType<FoodChoiceService>();
+            RegisterType<IFoodChoiceRepository, FoodChoiceRepository>(container);
+            RegisterType<TataboufContext>(container);
+            RegisterType<ValidationService>(container);
+            RegisterType<FoodChoiceService>(container);
 
             return container;
+        }
+
+        private static void RegisterType<T>(IUnityContainer container)
+        {
+            container.RegisterType<T>(new HttpContextLifetimeManager(typeof(T).FullName));
+        }
+
+        private static void RegisterType<I, T>(IUnityContainer container) where T : I
+        {
+            container.RegisterType<I, T>(new HttpContextLifetimeManager(typeof(T).FullName));
         }
     }
 }
